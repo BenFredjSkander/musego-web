@@ -1,0 +1,153 @@
+{{ include('partials/main.html.twig') }}
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Datatables'}) }}
+
+    <!-- DataTables -->
+    <link href="/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Responsive datatable examples -->
+    <link href="/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+{{ include('partials/body.html.twig') }}
+
+
+<body>
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Sponsors', title: 'modifier Sponsor'}) }}
+
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-body">
+                                {{ form_start(form) }}
+                                {{ form_row(form.nom) }}
+                                {{ form_row(form.photo) }}
+                                {{ form_row(form.capaciteFin) }}
+                                {{ form_row(form.idEvenement) }}
+
+
+                                <div class="row justify-content-end">
+
+
+                                    <div class="d-flex flex-wrap gap-3">
+
+                                        {{ form_row(form.save,{'label':'modifier'}) }}
+
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+            <!-- End Form Layout -->
+
+            <!-- Start Form Sizing -->
+
+            <!-- End Form Sizing -->
+
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    {{ include('partials/footer.html.twig') }}
+</div>
+<!-- end main content-->
+
+
+<!-- End Page-content -->
+
+
+{{ include('partials/footer.html.twig') }}
+<!-- end main content-->
+
+
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- plugin js -->
+<script src="{{ asset('/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('/libs/jquery-ui-dist/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('/libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('/libs/@fullcalendar/interaction/main.min.js') }}"></script>
+
+<!-- Calendar init -->
+<script src="{{ asset('/js/pages/calendar.init.js') }}"></script>
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- Required datatable js -->
+<script src="/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="/libs/jszip/jszip.min.js"></script>
+<script src="/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/js/pages/datatables.init.js"></script>
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+<!-- Calendar init -->
+<script src="{{ asset('/js/pages/calendar.init.js') }}"></script>
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+<script src="/libs/dropzone/min/dropzone.min.js"></script>
+
+</body>

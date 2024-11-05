@@ -1,0 +1,376 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Offres{% endblock %}
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-4.jpg', 'Mon profil', 'Profil') }}
+        <!--End breadcrumb area-->
+
+        <!--Start Buy Tickets Area-->
+        <section class="buy-tickets-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="buy-tickets-content">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="sec-title">
+                                        <div class="big-title"><h1>Mon profil</h1></div>
+                                    </div>
+                                    <div class="visit-day-select">
+                                        <div class="visit-day-tab tabs-box">
+                                            <ul class="tab-btns tab-buttons text-center clearfix">
+                                                <li data-tab="#profil" class="tab-btn active-btn">
+                                                    <span>Mon profil</span></li>
+                                                <li data-tab="#abonnement" class="tab-btn"><span>Mon abonnement</span></li>
+                                                <li data-tab="#events" class="tab-btn"><span>Mes événements</span></li>
+                                                {#                                                <li data-tab="#abonnements" class="tab-btn"><span>Mes abonnements</span> #}
+                                                </li>
+                                                <li data-tab="#workshops" class="tab-btn"><span>Mes formations</span>
+                                                </li>
+                                            </ul>
+                                            <div class="tabs-content">
+                                                <div class="tab active-tab" id="profil">
+                                                    <div class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Nom
+                                                                        d'utilisateur</h6></div>
+                                                                <div class="col-sm-9 text-secondary"> {{ user.username }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Email</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    {{ user.email }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Numéro de
+                                                                        téléphone</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary"> {{ user.phoneNumber }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Date de
+                                                                        création du compte</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary"> {{ user.createdDate|ago(locale='fr') }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="payment-button">
+                                                                <a class="btn-one"
+                                                                   href="{{ path('app_front_profile_edit') }}">Modifier
+                                                                    mon profile</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab" id="abonnement">
+                                                    <div class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                {% if app.user.abonnement is not null and date(app.user.abonnement.dateFin) > date() %}
+                                                            <div class="col-sm-8">
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Type d'abonnement</h6></div>
+                                                                <div class="col-sm-9 text-secondary"> {{ user.getAbonnement().type }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Prix d'abonnement</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    {{ user.getAbonnement().prix ~ '€' }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Date d'achat</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary"> {{ user.getAbonnement().dateDebut|date }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Date d'expiration</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary"> {{ user.getAbonnement().dateFin|date }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Votre abonnement est inscrit à l'offre</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    {{ user.getAbonnement().IdOffre.type }}
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"><h6 class="mb-0">Promotion de l'offre</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    {{ user.getAbonnement().IdOffre.promotion ~ '%' }}
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+                                                                <div class="col-sm-4">
+                                                                    <img src="{{ user.getAbonnement().IdOffre.image }}" class="rounded float-end" alt="offre image" width="200px" height="200px"/>
+                                                                    <br>
+                                                                    <div class="button">
+                                                                        <a class="btn-one" href="{{ path ('app_front_abonnement_pdf',{'id':user.getAbonnement().id}) }}">Télécharger la facture</a>
+                                                                    </div>
+                                                                </div>
+                                                                    {% else %}
+                                                                <div class="col-sm-12">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9"><h6 class="mb-0">Vous n'êtes pas actuellement abonné</h6></div>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="row">
+                                                                        <div class="m-1"><h6 class="mb-0">Veuillez consulter nos offres disponibles: </h6>
+                                                                        </div>
+                                                                        <div class="m-1">
+                                                                            <div class="button">
+                                                                                <a class="btn-one" href="{{ path('app_front_offre_list') }}">Nos offres</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab" id="events">
+                                                    <div class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="row items-container clearfix">
+                                                                <!--Start Single Art Box Style2-->
+
+                                                                {% if app.user.abonnement is not null and date(app.user.abonnement.dateFin) > date() %}
+                                                                {% for event in user.getIdEvenement %}
+
+                                                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all art insta">
+                                                                        <div class="single-art-box-style2 marbtm50"
+                                                                             style="border: 2px solid #d5d7d8">
+                                                                            <a>
+                                                                                <div class="text-holder">
+                                                                                    <h3>{{ event.nom }}</h3>
+                                                                                    <span>{{ event.nom }}</span><br>
+                                                                                    <span> {{ event.dateDebut|format_date }}-{{ event.dateFin|format_date }}</span><br>
+                                                                                    <span><a href="{{ path('app_front_evenements_details', {'id': event.id}) }}"><button>Details</button></a></span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                {% else %}
+                                                                    Vous n'êtes inscrits à aucun événements.
+
+                                                                {% endfor %}
+                                                                {% else %}
+                                                                    <div class="col-sm-12">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-9"><h6 class="mb-0">Vous n'êtes pas actuellement abonné</h6></div>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="row">
+                                                                            <div class="m-1"><h6 class="mb-0">Veuillez consulter nos offres disponibles: </h6>
+                                                                            </div>
+                                                                            <div class="m-1">
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_front_offre_list') }}">Nos offres</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endif %}
+                                                                <!--End Single Art Box Style2-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {#                                                <div class="tab" id="nopromo"> #}
+                                                    {#                                                    <h4>Sans promotion</h4> #}
+                                                    {#                                                    <div class="row items-container clearfix"> #}
+                                                    {#                                                        <div class="container"> #}
+                                                    {#                                                            <div class="sortable-masonry"> #}
+                                                    {#                                                                <div class="card-group"> #}
+                                                    {#                                                                    {% for offre in offres %} #}
+
+                                                    {#                                                                        {% if offre.promotion == 0 %} #}
+                                                    {#                                                                            <div class="card col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all art insta"> #}
+                                                    {#                                                                                <img class="card-img-top img-fluid" #}
+                                                    {#                                                                                     src="{{ offre.image }}" #}
+                                                    {#                                                                                     alt="Card image cap" #}
+                                                    {#                                                                                     style="max-height: 150px;max-width: 150px;"> #}
+                                                    {#                                                                                <div class="card-body"> #}
+                                                    {#                                                                                    <h4 class="card-title"> #}
+                                                    {#                                                                                        Titre: {{ offre.type }}</h4> #}
+                                                    {#                                                                                    <p class="card-text"> #}
+                                                    {#                                                                                        Description: {{ offre.description }}</p> #}
+                                                    {#                                                                                    <ul class="list-group list-group-flush"> #}
+
+                                                    {#                                                                                        <li class="list-group-item"> #}
+                                                    {#                                                                                            Prix: {{ offre.prix }}€ #}
+                                                    {#                                                                                        </li> #}
+
+                                                    {#                                                                                    </ul> #}
+                                                    {#                                                                                    <a href="{{ path('app_front_offre_show', {'id': offre.id}) }}" #}
+                                                    {#                                                                                       class="tab-btn"><span>En savoir plus sur {{ offre.type }}</span></a> #}
+
+                                                    {#                                                                                </div><!-- end cardbody --> #}
+                                                    {#                                                                            </div> #}
+                                                    {#                                                                        {% else %} #}
+
+                                                    {#                                                                        {% endif %} #}
+                                                    {#                                                                    {% endfor %} #}
+                                                    {#                                                                    <!-- end card --> #}
+                                                    {#                                                                </div> #}
+                                                    {#                                                            </div><!-- end card-group --> #}
+                                                    {#                                                        </div> #}
+                                                    {#                                                    </div> #}
+                                                    {#                                                </div> #}
+                                                </div>
+                                                <div class="tab" id="workshops">
+                                                    <div class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="row items-container clearfix">
+                                                                <!--Start Single Art Box Style2-->
+
+                                                                {% if app.user.abonnement is not null and date(app.user.abonnement.dateFin) > date() %}
+                                                                {% for atelier in user.getIdFormation %}
+
+                                                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all art insta">
+                                                                        <div class="single-art-box-style2 marbtm50"
+                                                                             style="border: 2px solid #d5d7d8">
+                                                                            <a>
+                                                                                <div class="text-holder">
+                                                                                    <h3>{{ atelier.nom }}</h3>
+                                                                                    <span>{{ atelier.nom }}</span><br>
+                                                                                    <span> {{ atelier.dateDebut|format_date }}-{{ atelier.dateFin|format_date }}</span><br>
+                                                                                    <span><a href="{{ path('app_front_formation_byAtelier', {'id': atelier.id}) }}"><button>Details</button></a></span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                {% else %}
+                                                                    Vous n'êtes inscrits à aucunes formations.
+                                                                {% endfor %}
+                                                                {% else %}
+                                                                    <div class="col-sm-12">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-9"><h6 class="mb-0">Vous n'êtes pas actuellement abonné</h6></div>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="row">
+                                                                            <div class="m-1"><h6 class="mb-0">Veuillez consulter nos offres disponibles: </h6>
+                                                                            </div>
+                                                                            <div class="m-1">
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_front_offre_list') }}">Nos offres</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endif %}
+                                                                <!--End Single Art Box Style2-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {#                                                <div class="tab" id="nopromo"> #}
+                                                    {#                                                    <h4>Sans promotion</h4> #}
+                                                    {#                                                    <div class="row items-container clearfix"> #}
+                                                    {#                                                        <div class="container"> #}
+                                                    {#                                                            <div class="sortable-masonry"> #}
+                                                    {#                                                                <div class="card-group"> #}
+                                                    {#                                                                    {% for offre in offres %} #}
+
+                                                    {#                                                                        {% if offre.promotion == 0 %} #}
+                                                    {#                                                                            <div class="card col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all art insta"> #}
+                                                    {#                                                                                <img class="card-img-top img-fluid" #}
+                                                    {#                                                                                     src="{{ offre.image }}" #}
+                                                    {#                                                                                     alt="Card image cap" #}
+                                                    {#                                                                                     style="max-height: 150px;max-width: 150px;"> #}
+                                                    {#                                                                                <div class="card-body"> #}
+                                                    {#                                                                                    <h4 class="card-title"> #}
+                                                    {#                                                                                        Titre: {{ offre.type }}</h4> #}
+                                                    {#                                                                                    <p class="card-text"> #}
+                                                    {#                                                                                        Description: {{ offre.description }}</p> #}
+                                                    {#                                                                                    <ul class="list-group list-group-flush"> #}
+
+                                                    {#                                                                                        <li class="list-group-item"> #}
+                                                    {#                                                                                            Prix: {{ offre.prix }}€ #}
+                                                    {#                                                                                        </li> #}
+
+                                                    {#                                                                                    </ul> #}
+                                                    {#                                                                                    <a href="{{ path('app_front_offre_show', {'id': offre.id}) }}" #}
+                                                    {#                                                                                       class="tab-btn"><span>En savoir plus sur {{ offre.type }}</span></a> #}
+
+                                                    {#                                                                                </div><!-- end cardbody --> #}
+                                                    {#                                                                            </div> #}
+                                                    {#                                                                        {% else %} #}
+
+                                                    {#                                                                        {% endif %} #}
+                                                    {#                                                                    {% endfor %} #}
+                                                    {#                                                                    <!-- end card --> #}
+                                                    {#                                                                </div> #}
+                                                    {#                                                            </div><!-- end card-group --> #}
+                                                    {#                                                        </div> #}
+                                                    {#                                                    </div> #}
+                                                    {#                                                </div> #}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Buy Tickets Area-->
+
+
+        <!--Start Partner Area Style3-->
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+{% endblock %}
+
+{% block customJS %}
+    <script>
+        const myDiv = document.getElementById("moreBtn");
+        myDiv.addEventListener("click", (event) => {
+            $('html,body').animate({
+                    scrollTop: $(".tabs-box").offset().top
+                },
+                'slow');
+        })
+    </script>
+{% endblock %}

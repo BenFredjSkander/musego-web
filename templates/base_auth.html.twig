@@ -1,0 +1,45 @@
+{{ include('partials/main.html.twig') }}
+{% block head %}
+{% endblock %}
+
+<body class="authentication-bg">
+<div class="account-pages my-5 pt-sm-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <a href="{{ path('app_front_home') }}" class="mb-5 d-block auth-logo">
+                        <img src="{{ asset('images/LOGO dark.png') }}" alt="" height="100" class="logo logo-dark">
+                        <img src="{{ asset('images/LOGO dark.png') }}" alt="" height="100" class="logo logo-light">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card">
+
+                    <div class="card-body p-4">
+                        {% block bodyContent %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <p>© {{ 'now' | date('Y') }} MuseGO. Crafted with <i class="mdi mdi-heart text-danger"></i>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+
+{{ include('partials/vendor-scripts.html.twig') }}
+{% block customJS %}{% endblock %}
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+</body>

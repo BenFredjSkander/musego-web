@@ -1,0 +1,202 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Offres{% endblock %}
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        {{ breadcrumb.input('images/rami/stage_header_rami.jpg', 'Abonnements', 'Offres') }}
+
+
+        <!--Start Buy Tickets Area-->
+        <section class="buy-tickets-area align-center m-auto">
+            <div class="container align-center m-auto">
+                <div class="row align-center m-auto">
+                    <div class="col-xl-12 align-center m-auto">
+                        <div class="buy-tickets-content align-center m-auto">
+                            <div class="row align-center m-auto">
+                                <div class="visit-day-select">
+                                    <div class="row">
+                                        <div class="col-xl-8">
+                                    <h2>Informations sur l'offre: {{ showoffre.type }}</h2>
+                                        </div>
+                                        <div class="col-xl-4">
+                                    <img src="{{ showoffre.image }}" class="rounded float-end" alt="offre image" width="200px" height="200px"/>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xl-3">
+                                    <h3>Description : </h3>
+                                        </div>
+                                        <div class="col-xl-9">
+                                    <h5>{{ showoffre.description }}</h5>
+                                        </div>
+                                    </div>
+                                    <h3>Prix : {{ ( showoffre.prix + 5 ) ~ '€' }}</h3>
+                                    <h3>Promotion : {{ showoffre.promotion ~ '%' }}</h3>
+                                    {% if showoffre.promotion > 0 %}
+                                    <h3>Date de début de validité : {{ showoffre.dateDebut|date }}</h3>
+                                    <h3>Date de fin de validité : {{ showoffre.dateFin|date }}</h3>
+                                    {% endif %}
+                                    {% if issubbed is null or date(issubbed.dateFin)<date() %}
+                                        <h2>Veuillez choisir un type d'abonnement pour l'offre {{ showoffre.type }}</h2>
+                                        <br>
+                                    <div class="visit-day-tab tabs-box">
+                                        <ul class="tab-btns tab-buttons text-center clearfix">
+                                            <li data-tab="#heb" class="tab-btn"><span>Hebdomadaire</span></li>
+                                            <li data-tab="#mens" class="tab-btn"><span>Mensuel</span></li>
+                                            <li data-tab="#ann" class="tab-btn"><span>Annuel</span></li>
+                                        </ul>
+                                        <div class="tabs-content">
+                                            <div class="tab" id="heb">
+
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="tickets-Payment-box">
+                                                            <h3>Abonnement hebdomadaire</h3>
+                                                            <div class="text">
+                                                                <p>Les abonnements doivent être achetés en ligne via votre carte de paiement.
+                                                                    Toutes les données confidentielles concernant vos paiements sont protégées, après avoir terminé votre transaction,
+                                                                    vous pouvez télécharger un document pdf qui contient le traitement de votre facture.</p>
+                                                            </div>
+                                                            <div class="select-tickets-box">
+                                                                <form action="#">
+                                                                    <div class="order-total">
+                                                                        <div class="left">
+                                                                            <p>Montant Total</p>
+                                                                        </div>
+                                                                        <div class="right">
+                                                                            <p>{{ (((5+showoffre.prix)*7)*(100-showoffre.promotion)/100)~'€' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                        <div class="payment-button">
+                                                                            <a class="btn-one" href="{{ path('checkout', {'id': showoffre.id,'type':'Hebdomadaire','prix':(((5+showoffre.prix)*7)*(100-showoffre.promotion)/100)}) }}">Continuer le Paiement</a>
+                                                                        </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="bottom-text">
+                                                                <p>Si vous avez une question, n'hésitez pas à nous
+                                                                    contacter sur <a href="mailto:info@templatepath.com">abonnements@musego.org</a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 m-auto">
+                                                        <img src="{{ asset('images/login-img.png') }}" width="800px" height="800px" alt="Abonnement complete">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab" id="mens">
+
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="tickets-Payment-box">
+                                                            <h3>Abonnement mensuel</h3>
+                                                            <div class="text">
+                                                                <p>Les abonnements doivent être achetés en ligne via votre carte de paiement.
+                                                                    Toutes les données confidentielles concernant vos paiements sont protégées, après avoir terminé votre transaction,
+                                                                    vous pouvez télécharger un document pdf qui contient le traitement de votre facture.</p>
+                                                            </div>
+                                                            <div class="select-tickets-box">
+                                                                <form action="#">
+                                                                    <div class="order-total">
+                                                                        <div class="left">
+                                                                            <p>Montant Total</p>
+                                                                        </div>
+                                                                        <div class="right">
+                                                                            <p>{{ (((5+showoffre.prix)*30)*(100-showoffre.promotion)/100)~'€' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                        <div class="payment-button">
+                                                                            <a class="btn-one" href="{{ path('checkout', {'id': showoffre.id,'type':'Mensuel','prix':(((5+showoffre.prix)*3)*(100-showoffre.promotion)/100)}) }}">Continuer le Paiement</a>
+                                                                        </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="bottom-text">
+                                                                <p>Si vous avez une question, n'hésitez pas à nous
+                                                                    contacter sur <a
+                                                                            href="mailto:info@templatepath.com">abonnements@musego.org</a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 m-auto">
+                                                        <img src="{{ asset('images/login-img.png') }}" width="800px" height="800px" alt="Abonnement complete">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab" id="ann">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="tickets-Payment-box">
+                                                            <h3>Abonnement annuel</h3>
+                                                            <div class="text">
+                                                                <p>Les abonnements doivent être achetés en ligne via votre carte de paiement.
+                                                                    Toutes les données confidentielles concernant vos paiements sont protégées, après avoir terminé votre transaction,
+                                                                    vous pouvez télécharger un document pdf qui contient le traitement de votre facture.</p>
+                                                            </div>
+                                                            <div class="select-tickets-box">
+                                                                <form action="#">
+                                                                    <div class="order-total">
+                                                                        <div class="left">
+                                                                            <p>Montant Total</p>
+                                                                        </div>
+                                                                        <div class="right">
+                                                                            <p>{{ (((5+showoffre.prix)*365)*(100-showoffre.promotion)/100)~'€' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="payment-button">
+                                                                        <a class="btn-one" href="{{ path('checkout', {'id': showoffre.id,'type':'Annuel','prix':(((5+showoffre.prix)*365)*(100-showoffre.promotion)/100)}) }}">Continuer le Paiement</a>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="bottom-text">
+                                                                <p>Si vous avez une question, n'hésitez pas à nous
+                                                                    contacter sur <a
+                                                                            href="mailto:info@templatepath.com">abonnements@musego.org</a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 m-auto">
+                                                        <img src="{{ asset('images/login-img.png') }}" width="800px" height="800px" alt="Abonnement complete">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        {% else %}
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <h2>Félicitations!, vous êtes déjà abonné à cette offre.</h2>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <img src="{{ asset('images/register-img.png') }}" width="400px" height="400px" alt="Abonnement complete">
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Buy Tickets Area-->
+
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+{% endblock %}

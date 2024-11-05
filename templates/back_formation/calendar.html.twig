@@ -1,0 +1,115 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Calendar'}) }}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+    <link href="{{ asset('/libs/@fullcalendar/bootstrap/main.min.css') }}" rel="stylesheet" type="text/css"/>
+
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Apps', title: 'Calendar'}) }}
+
+                <div class="row">
+                    <div class="col-12">
+
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="calendar-holder"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    {{ include('partials/footer.html.twig') }}
+</div>
+<!-- end main content-->
+
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- plugin js -->
+<script src="{{ asset('/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('/libs/jquery-ui-dist/jquery-ui.min.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+<script src="{{ asset('/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+
+<!-- Calendar init -->
+{# <script src="{{ asset('/js/pages/calendar.init.js') }}"></script> #}
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        var calendarEl = document.getElementById('calendar-holder');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
+            editable: false,
+            droppable: true,
+            selectable: true,
+            defaultView: 'dayGridMonth',
+            themeSystem: 'bootstrap',
+            eventSources: [
+                {
+                    url: "{{ path('fc_load_events') }}",
+                    method: "POST",
+                    extraParams: {
+                        filters: JSON.stringify({})
+                    },
+                    failure: () => {
+                        // alert("There was an error while fetching FullCalendar!");
+                    },
+                },
+            ],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay',
+            },
+            timeZone: 'UTC',
+        });
+        calendar.render();
+    });
+</script>
+
+</body>

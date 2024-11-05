@@ -1,0 +1,86 @@
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="{{ path('app_front_home') }}" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="{{ asset('images/logo-sm.png') }}" alt="" height="40">
+            </span>
+                    <span class="logo-lg">
+                <img src="{{ asset('images/LogoLarge.png') }}" alt="" height="60">
+            </span>
+                </a>
+
+                <a href="{{ path('app_front_home') }}" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="{{ asset('images/logo-sm.png') }}" alt="" height="40">
+            </span>
+                    <span class="logo-lg">
+                <img src="{{ asset('images/LogoLarge.png') }}" alt="" height="60">
+            </span>
+                </a>
+            </div>
+            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+
+            {#            <!-- App Search--> #}
+            {#            <form class="app-search d-none d-lg-block"> #}
+            {#                <div class="position-relative"> #}
+            {#                    <input type="text" class="form-control" placeholder="{% trans %}Search{% endtrans %}..."> #}
+            {#                    <span class="uil-search"></span> #}
+            {#                </div> #}
+            {#            </form> #}
+
+        </div>
+
+        <div class="d-flex">
+
+
+            <div class="dropdown d-none d-lg-inline-block ms-1">
+                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                    <i class="uil-minus-path"></i>
+                </button>
+            </div>
+
+
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% if app.user.profilePic is null %}
+                        <div class="avatar-xs d-inline-block me-1">
+                            <div class="avatar-title bg-soft-primary rounded-circle text-primary">
+                                <i class="mdi mdi-account-circle m-0"></i>
+                            </div>
+                        </div>
+                    {% else %}
+                        <img class="rounded-circle header-profile-user" src="/images/users/avatar-4.jpg"
+                             alt="Header Avatar">
+                    {% endif %}
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{{ app.user.username }}</span>
+                    <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <a class="dropdown-item" href="{{ path('app_back_users_profile', {'id':app.user.id}) }}"><i
+                                class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span
+                                class="align-middle">{% trans %}Mon profile{% endtrans %}</span></a>
+                    <a class="dropdown-item" href="{{ path('app_front_home') }}"><i
+                                class="uil uil-home font-size-18 align-middle me-1 text-muted"></i> <span
+                                class="align-middle">Front office</span></a>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}"><i
+                                class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span
+                                class="align-middle">{% trans %}Se déconnecter{% endtrans %}</span></a>
+                </div>
+            </div>
+
+            {#            <div class="dropdown d-inline-block"> #}
+            {#                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect"> #}
+            {#                    <i class="uil-cog"></i> #}
+            {#                </button> #}
+            {#            </div> #}
+
+        </div>
+    </div>
+</header>

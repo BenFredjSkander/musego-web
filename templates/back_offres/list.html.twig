@@ -1,0 +1,232 @@
+<html>
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Liste des offres'}) }}
+    <link href="/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+<body>
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Offres', title: 'Offres'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <a href="{{ path('app_back_offre_add') }}"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="mdi mdi-plus me-2"></i> Ajouter</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <input type="text" id="search" class="form-control rounded bg-light border-0"
+                                                           placeholder="Search...">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table id="datatable-buttons"
+                                           class="table table-striped table-bordered dt-responsive nowrap"
+                                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Prix (€)</th>
+                                            <th scope="col">Promotion (%)</th>
+                                            <th scope="col">Date debut</th>
+                                            <th scope="col">Date fin</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Abonnements</th>
+                                            <th scope="col" style="width: 200px;">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="all">
+                                        {% for offre in pagination %}
+                                            <tr>
+                                                <td><a class="image-popup-no-margins" href="{{ offre.image }}">
+                                                        <img class="img-fluid" alt="" src="{{ offre.image }}" width="75">
+                                                    </a>
+                                                </td>
+                                                <td>{{offre.type}}</td>
+
+                                                <td>{{offre.prix ~ '€'}}</td>
+                                                <td>{{offre.promotion ~ '%'}}</td>
+
+                                                <td>{{offre.dateDebut|date}}</td>
+                                                <td>{{offre.dateFin|date}}</td>
+                                                <td><ul class="list-inline mb-0">
+                                                    <li class="list-inline-item">
+                                                        <a href="#" class="px-2 text-primary"><i
+                                                                    class="uil uil-comment-dots font-size-18"
+                                                                    data-bs-toggle="modal" data-bs-target="{{'#myModal'~ offre.id }}"></i></a>
+
+                                                        <div id="{{'myModal'~ offre.id }}" class="modal fade" tabindex="-1" role="dialog"
+                                                             aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="myModalLabel">Description sur l'offre {{ offre.type }}</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <!--<h5 class="font-size-16">Description:</h5>-->
+                                                                        <p>{{ offre.description }}</p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-light waves-effect"
+                                                                                data-bs-dismiss="modal">Fermer
+                                                                        </button>
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div>
+                                                    </li></ul>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path('app_back_abonnement_list_offre',{'id':offre.id}) }}" class="px-2 text-primary"><i
+                                                                        class="uil uil-bill font-size-18"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path('app_back_offre_update',{'id':offre.id}) }}" class="px-2 text-primary"><i
+                                                                        class="uil uil-pen font-size-18"></i></a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path('app_back_offre_delete',{'id':offre.id}) }}" class="px-2 text-danger"><i
+                                                                        class="uil uil-trash-alt font-size-18"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tbody id="searchtab"></tbody>
+                                    </table>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+                                        <div>
+                                            <p class="mb-sm-0">{{ "Affichage de 1 à 4 de " ~ pagination.getTotalItemCount ~ " lignes" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="float-sm-end">
+                                            <ul class="pagination mb-sm-0">
+                                                {{ knp_pagination_render(pagination) }}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+<script src="/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/js/pages/lightbox.init.js"></script>
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#search").keyup(function (e) {
+            var value = $(this).val();
+            $.ajax({
+                url: "{{ path('app_back_offre_search') }}",
+                type: 'GET',
+                data: {
+                    'query': value
+                },
+                success: function (retour) {
+                    if (retour.length) {
+                        console.log(JSON.stringify(retour))
+                        $("#searchtab").empty();
+                        $.each(JSON.parse(retour), function (i, obj) {
+                            console.log(obj.roles);
+                            var active;
+                            var role;
+                            $("#all").hide();
+                            $("#searchtab").append('<tr><td> <a class="image-popup-no-margins" href="' +
+                                obj.image + '"><img class="img-fluid" alt="" src="' + obj.image +
+                                '" width="75"></a> </td> <td> ' + obj.type +
+                                '  </td><td> ' + obj.prix + '  </td><td> ' + obj.promotion +
+                                '  </td><td>    ' + moment(obj.dateDebut).format('MMMM Do YYYY, h:mm:ss') +
+                                '  </td><td>    ' + moment(obj.dateFin).format('MMMM Do YYYY, h:mm:ss') +
+                                '  </td>  <td></td>  ' +
+                                '<td><ul class="list-inline mb-0"> <li class="list-inline-item"> <a href="/back/abonnement/list/offre/'+obj.id+'" class="px-2 text-primary"><i class="uil uil-bill font-size-18"></i></a> </li> </ul></td>  <td> <ul class="list-inline mb-0"> <li class="list-inline-item"> <a href="/back/offre/edit/'+obj.id+'" class="px-2 text-primary"><i class="uil uil-pen font-size-18"></i></a> </li> <li class="list-inline-item"> <a href="/back/offre/delete/'+obj.id+'" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a> </li> </ul> </td></tr>');
+                        });
+                    } else {
+                        $("#all").show();
+                        $("#searchtab").empty();
+                        $("#searchtab").fadeIn('fast');
+                    }
+                },
+            });
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

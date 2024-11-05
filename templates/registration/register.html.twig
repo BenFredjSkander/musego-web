@@ -1,0 +1,79 @@
+{% extends 'base_auth.html.twig' %}
+{% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
+
+{% block head %}
+    <head>
+
+        {{ include('partials/title-meta.html.twig', {title: 'Register'}) }}
+
+        {{ include('partials/head-css.html.twig') }}
+        <link rel='stylesheet'
+              href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.21/css/intlTelInput.css'>
+        <!-- style to override default intl display -->
+        <style>
+            .iti {
+                display: block;
+            }
+        </style>
+
+    </head>
+{% endblock %}
+
+{% block bodyContent %}
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="text-center mt-2">
+        <h5 class="text-primary">Créer un compte</h5>
+        <p class="text-muted">Créez votre MuseGO pour commencer</p>
+    </div>
+    <div class="p-2 mt-4">
+        {{ form(registrationForm) }}
+        <div class="mt-4 text-center">
+            <p class="text-muted mb-0">
+                Vous avez déjà un compte ? <a href="{{ path('app_login') }}"
+                                              class="fw-medium text-primary">Se connecter</a></p>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customJS %}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.21/js/intlTelInput-jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.21/js/utils.min.js'></script>
+    <script src={{ asset('js/bootstrap-show-password.min.js') }}></script>
+    <script>(function ($) {
+            // function that uses intl-tel-input format as jQuery-Mask
+            function initMasking(formatterInput, maskedInput) {
+                // get the format fromt intl-tel-input placeholder
+                var format = $(formatterInput).attr('placeholder');
+
+                // use the format as placeholder to jQuery-Mask input
+                $(maskedInput).attr('placeholder', format);
+
+                // replace all digits to zero and use is as the mask
+                $(maskedInput).mask(format.replace(/[1-9]/g, 0));
+            }
+
+            // initialize intl-tel-input
+            $("#{{ registrationForm.phoneNumber.vars.id }}").intlTelInput({
+                initialCountry: "TN",
+                autoPlaceholder: "aggressive",
+            });
+
+            // initialize the mask
+            initMasking("#{{ registrationForm.phoneNumber.vars.id }}", "#{{ registrationForm.phoneNumber.vars.id }}");
+
+            // update the mask format when changing country
+            $("#{{ registrationForm.phoneNumber.vars.id }}").on("countrychange", function (e, countryData) {
+                $(this).val('');
+                $("#{{ registrationForm.phoneNumber.vars.id }}").val('');
+
+                // update the mask
+                initMasking(this, "#{{ registrationForm.phoneNumber.vars.id }}");
+            });
+        })(jQuery);</script>
+{% endblock %}
+

@@ -1,0 +1,56 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Offres{% endblock %}
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+        <!--End breadcrumb area-->
+
+        <!--Start Buy Tickets Area-->
+        <section class="buy-tickets-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="buy-tickets-content">
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <img src="{{ asset('images/coming-soon-img.png') }}" width="800px" height="800px" alt="echec">
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="sec-title">
+                                        <div class="big-title"><h2>Merci pour votre tentative d'abonnement!</h2></div>
+                                        <div class="subscribe-title"><h2>Nous apprécions votre affaire!</h2>
+                                            <br>
+                                                <h2>Malheureusement votre paiement n'a pas abouti :(</h2>
+                                                <h2>Veuillez nous contacter sur
+                                                <a href="mailto:orders@example.com">contact@musego.com</a>.</h2></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Buy Tickets Area-->
+
+
+        <!--Start Partner Area Style3-->
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+{% endblock %}

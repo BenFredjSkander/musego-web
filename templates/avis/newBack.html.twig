@@ -1,0 +1,37 @@
+
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block head %}
+
+
+    {{ include('partials/title-meta.html.twig', {title: 'User List'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+
+
+{{ include('partials/body.html.twig') }}
+{{ include('partials/menu.html.twig') }}
+{% endblock %}
+{% block body %}
+
+<div class="boxed-wrapper">
+        <div class="boxed-wrapper">
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg', 'Avis', 'Avis') }}
+        <!--End breadcrumb area-->
+    <h1>Create new Avis</h1>
+
+    {{ include('avis/_form.html.twig') }}
+
+    <a href="{{ path('app_avis_index') }}">back to list</a>
+
+    </div>
+    
+
+
+{% endblock %}

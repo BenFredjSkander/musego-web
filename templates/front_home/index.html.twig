@@ -1,0 +1,865 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Musego{% endblock %}
+{% block customCSS %}
+    <link rel="stylesheet" href="{{ asset('libs/toastr/build/toastr.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+
+        <!--Main Slider-->
+        <section class="main-slider style4">
+            <div class="rev_slider_wrapper fullwidthbanner-container" id="rev_slider_one_wrapper" data-source="gallery">
+                <div class="rev_slider fullwidthabanner" id="rev_slider_four" data-version="5.4.1">
+                    <ul>
+                        <li data-description="Slide Description" data-easein="default" data-easeout="default"
+                            data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade"
+                            data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1689"
+                            data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3=""
+                            data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9=""
+                            data-rotate="0" data-saveperformance="off" data-slotamount="default"
+                            data-thumb="images/slides/v4-1.jpg" data-title="Slide Title"
+                            data-transition="parallaxvertical">
+
+                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="10"
+                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina=""
+                                 src="{{ asset('images/slides/v4-1.jpg') }}">
+
+                            <div class="tp-caption"
+                                 data-paddingbottom="[0,0,0,0]"
+                                 data-paddingleft="[0,0,0,0]"
+                                 data-paddingright="[0,0,0,0]"
+                                 data-paddingtop="[0,0,0,0]"
+                                 data-responsive_offset="on"
+                                 data-type="text"
+                                 data-height="none"
+                                 data-width="['1200','900','600','400']"
+                                 data-whitespace="normal"
+                                 data-hoffset="['15','15','15','15']"
+                                 data-voffset="['-35','-100','-90','-80']"
+                                 data-x="['middle','middle','middle','middle']"
+                                 data-y="['middle','middle','middle','middle']"
+                                 data-textalign="['center','center','center','center']"
+                                 data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1500,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                 style="z-index: 7; white-space: nowrap;">
+                                <div class="slide-content">
+                                    <div class="big-title">Préservez le passé pour l'avenir...</div>
+                                </div>
+                            </div>
+                            <div class="tp-caption"
+                                 data-paddingbottom="[0,0,0,0]"
+                                 data-paddingleft="[0,0,0,0]"
+                                 data-paddingright="[0,0,0,0]"
+                                 data-paddingtop="[0,0,0,0]"
+                                 data-responsive_offset="on"
+                                 data-type="text"
+                                 data-height="none"
+                                 data-width="['1200','900','600','400']"
+                                 data-whitespace="normal"
+                                 data-hoffset="['15','15','15','15']"
+                                 data-voffset="['100','35','20','10']"
+                                 data-x="['middle','middle','middle','middle']"
+                                 data-y="['middle','middle','middle','middle']"
+                                 data-textalign="['center','center','center','center']"
+                                 data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":2000,"ease":"Power3.easeInOut"},
+                    {"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
+                                 style="z-index: 7; white-space: nowrap;">
+                                <div class="slide-content">
+                                    <div class="text">Du 4 Mai jusqu'au 1 Juin 2023</div>
+                                </div>
+                            </div>
+                            {#                            <div class="tp-caption" #}
+                            {#                                 data-paddingbottom="[0,0,0,0]" #}
+                            {#                                 data-paddingleft="[0,0,0,0]" #}
+                            {#                                 data-paddingright="[0,0,0,0]" #}
+                            {#                                 data-paddingtop="[0,0,0,0]" #}
+                            {#                                 data-responsive_offset="on" #}
+                            {#                                 data-type="text" #}
+                            {#                                 data-height="none" #}
+                            {#                                 data-width="['1200','900','600','400']" #}
+                            {#                                 data-whitespace="normal" #}
+                            {#                                 data-hoffset="['15','15','15','15']" #}
+                            {#                                 data-voffset="['195','130','110','90']" #}
+                            {#                                 data-x="['middle','middle','middle','middle']" #}
+                            {#                                 data-y="['middle','middle','middle','middle']" #}
+                            {#                                 data-textalign="['center','center','center','center']" #}
+                            {#                                 data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":3000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                            {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                            {#                                <div class="slide-content middle-slide"> #}
+                            {#                                    <div class="btn-box"> #}
+                            {#                                        <a class="shop-btn" href="#">View Details</a> #}
+                            {#                                    </div> #}
+                            {#                                </div> #}
+                            {#                            </div> #}
+
+                        </li>
+
+                        {#                        <li data-description="Slide Description" data-easein="default" data-easeout="default" #}
+                        {#                            data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" #}
+                        {#                            data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1687" #}
+                        {#                            data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" #}
+                        {#                            data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" #}
+                        {#                            data-rotate="0" data-saveperformance="off" data-slotamount="default" #}
+                        {#                            data-thumb="images/slides/v4-1.jpg" data-title="Slide Title" #}
+                        {#                            data-transition="parallaxvertical"> #}
+
+                        {#                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="10" #}
+                        {#                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" #}
+                        {#                                 src="{{ asset('images/slides/v4-1.jpg') }}"> #}
+
+                        {#                            <div class="tp-caption" #}
+                        {#                                 data-paddingbottom="[0,0,0,0]" #}
+                        {#                                 data-paddingleft="[0,0,0,0]" #}
+                        {#                                 data-paddingright="[0,0,0,0]" #}
+                        {#                                 data-paddingtop="[0,0,0,0]" #}
+                        {#                                 data-responsive_offset="on" #}
+                        {#                                 data-type="text" #}
+                        {#                                 data-height="none" #}
+                        {#                                 data-width="['1200','900','600','400']" #}
+                        {#                                 data-whitespace="normal" #}
+                        {#                                 data-hoffset="['15','15','15','15']" #}
+                        {#                                 data-voffset="['-35','-100','-90','-80']" #}
+                        {#                                 data-x="['middle','middle','middle','middle']" #}
+                        {#                                 data-y="['middle','middle','middle','middle']" #}
+                        {#                                 data-textalign="['center','center','center','center']" #}
+                        {#                                 data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1500,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                        {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                        {#                                <div class="slide-content"> #}
+                        {#                                    <div class="big-title">Cracy Emin<br> a Fortnight Of Tears</div> #}
+                        {#                                </div> #}
+                        {#                            </div> #}
+                        {#                            <div class="tp-caption" #}
+                        {#                                 data-paddingbottom="[0,0,0,0]" #}
+                        {#                                 data-paddingleft="[0,0,0,0]" #}
+                        {#                                 data-paddingright="[0,0,0,0]" #}
+                        {#                                 data-paddingtop="[0,0,0,0]" #}
+                        {#                                 data-responsive_offset="on" #}
+                        {#                                 data-type="text" #}
+                        {#                                 data-height="none" #}
+                        {#                                 data-width="['1200','900','600','400']" #}
+                        {#                                 data-whitespace="normal" #}
+                        {#                                 data-hoffset="['15','15','15','15']" #}
+                        {#                                 data-voffset="['100','35','20','10']" #}
+                        {#                                 data-x="['middle','middle','middle','middle']" #}
+                        {#                                 data-y="['middle','middle','middle','middle']" #}
+                        {#                                 data-textalign="['center','center','center','center']" #}
+                        {#                                 data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":2000,"ease":"Power3.easeInOut"}, #}
+                        {#                    {"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                        {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                        {#                                <div class="slide-content"> #}
+                        {#                                    <div class="text">From 13 Dec 2018 until 15 May 2019</div> #}
+                        {#                                </div> #}
+                        {#                            </div> #}
+                        {#                            <div class="tp-caption" #}
+                        {#                                 data-paddingbottom="[0,0,0,0]" #}
+                        {#                                 data-paddingleft="[0,0,0,0]" #}
+                        {#                                 data-paddingright="[0,0,0,0]" #}
+                        {#                                 data-paddingtop="[0,0,0,0]" #}
+                        {#                                 data-responsive_offset="on" #}
+                        {#                                 data-type="text" #}
+                        {#                                 data-height="none" #}
+                        {#                                 data-width="['1200','900','600','400']" #}
+                        {#                                 data-whitespace="normal" #}
+                        {#                                 data-hoffset="['15','15','15','15']" #}
+                        {#                                 data-voffset="['195','130','110','90']" #}
+                        {#                                 data-x="['middle','middle','middle','middle']" #}
+                        {#                                 data-y="['middle','middle','middle','middle']" #}
+                        {#                                 data-textalign="['center','center','center','center']" #}
+                        {#                                 data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":3000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                        {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                        {#                                <div class="slide-content middle-slide"> #}
+                        {#                                    <div class="btn-box"> #}
+                        {#                                        <a class="shop-btn" href="#">View Details</a> #}
+                        {#                                    </div> #}
+                        {#                                </div> #}
+                        {#                            </div> #}
+
+
+                        {#                        </li> #}
+
+                        {#                        <li data-description="Slide Description" data-easein="default" data-easeout="default" #}
+                        {#                            data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" #}
+                        {#                            data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1688" #}
+                        {#                            data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" #}
+                        {#                            data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" #}
+                        {#                            data-rotate="0" data-saveperformance="off" data-slotamount="default" #}
+                        {#                            data-thumb="images/slides/v4-1.jpg" data-title="Slide Title" #}
+                        {#                            data-transition="parallaxvertical"> #}
+
+                        {#                            <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="10" #}
+                        {#                                 data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" #}
+                        {#                                 src="{{ asset('images/slides/v4-1.jpg') }}"> #}
+
+                        {#                            <div class="tp-caption" #}
+                        {#                                 data-paddingbottom="[0,0,0,0]" #}
+                        {#                                 data-paddingleft="[0,0,0,0]" #}
+                        {#                                 data-paddingright="[0,0,0,0]" #}
+                        {#                                 data-paddingtop="[0,0,0,0]" #}
+                        {#                                 data-responsive_offset="on" #}
+                        {#                                 data-type="text" #}
+                        {#                                 data-height="none" #}
+                        {#                                 data-width="['1200','900','600','400']" #}
+                        {#                                 data-whitespace="normal" #}
+                        {#                                 data-hoffset="['15','15','15','15']" #}
+                        {#                                 data-voffset="['-35','-100','-90','-80']" #}
+                        {#                                 data-x="['middle','middle','middle','middle']" #}
+                        {#                                 data-y="['middle','middle','middle','middle']" #}
+                        {#                                 data-textalign="['center','center','center','center']" #}
+                        {#                                 data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1500,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                        {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                        {#                                <div class="slide-content"> #}
+                        {#                                    <div class="big-title">Cracy Emin<br> a Fortnight Of Tears</div> #}
+                        {#                                </div> #}
+                        {#                            </div> #}
+                        {#                            <div class="tp-caption" #}
+                        {#                                 data-paddingbottom="[0,0,0,0]" #}
+                        {#                                 data-paddingleft="[0,0,0,0]" #}
+                        {#                                 data-paddingright="[0,0,0,0]" #}
+                        {#                                 data-paddingtop="[0,0,0,0]" #}
+                        {#                                 data-responsive_offset="on" #}
+                        {#                                 data-type="text" #}
+                        {#                                 data-height="none" #}
+                        {#                                 data-width="['1200','900','600','400']" #}
+                        {#                                 data-whitespace="normal" #}
+                        {#                                 data-hoffset="['15','15','15','15']" #}
+                        {#                                 data-voffset="['100','35','20','10']" #}
+                        {#                                 data-x="['middle','middle','middle','middle']" #}
+                        {#                                 data-y="['middle','middle','middle','middle']" #}
+                        {#                                 data-textalign="['center','center','center','center']" #}
+                        {#                                 data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":2000,"ease":"Power3.easeInOut"}, #}
+                        {#                    {"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                        {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                        {#                                <div class="slide-content"> #}
+                        {#                                    <div class="text">From 13 Dec 2018 until 15 May 2019</div> #}
+                        {#                                </div> #}
+                        {#                            </div> #}
+                        {#                            <div class="tp-caption" #}
+                        {#                                 data-paddingbottom="[0,0,0,0]" #}
+                        {#                                 data-paddingleft="[0,0,0,0]" #}
+                        {#                                 data-paddingright="[0,0,0,0]" #}
+                        {#                                 data-paddingtop="[0,0,0,0]" #}
+                        {#                                 data-responsive_offset="on" #}
+                        {#                                 data-type="text" #}
+                        {#                                 data-height="none" #}
+                        {#                                 data-width="['1200','900','600','400']" #}
+                        {#                                 data-whitespace="normal" #}
+                        {#                                 data-hoffset="['15','15','15','15']" #}
+                        {#                                 data-voffset="['195','130','110','90']" #}
+                        {#                                 data-x="['middle','middle','middle','middle']" #}
+                        {#                                 data-y="['middle','middle','middle','middle']" #}
+                        {#                                 data-textalign="['center','center','center','center']" #}
+                        {#                                 data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":3000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]' #}
+                        {#                                 style="z-index: 7; white-space: nowrap;"> #}
+                        {#                                <div class="slide-content middle-slide"> #}
+                        {#                                    <div class="btn-box"> #}
+                        {#                                        <a class="shop-btn" href="#">View Details</a> #}
+                        {#                                    </div> #}
+                        {#                                </div> #}
+                        {#                            </div> #}
+
+                        {#                        </li> #}
+
+                    </ul>
+                </div>
+            </div>
+
+            <!--Scroll Dwwn Btn-->
+            <div class="mouse-btn-down scroll-to-explore" data-target=".about-style3-area"></div>
+
+        </section>
+        <!--End Main Slider-->
+
+        <!--Start Contact Us Area-->
+        <section class="contact-us-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="left-content">
+                            <p>Ouvert tous les jours de 9:00 jusqu'à 18:00</p>
+                        </div>
+                        <div class="right-content">
+                            <ul>
+                                <li>
+                                    <h3>Nous Contacter</h3>
+                                    <p><a href="tel:16234569400"> (+216) 70 700 700 </a></p>
+                                </li>
+                                <li>
+                                    <h3> Notre Localisation :</h3>
+                                    <p>Centre ville tunis, Tunisie</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Contact Us Area-->
+
+        <!--Start About Style3 Area-->
+        <section class="about-style3-area">
+            <div class="container">
+                <div class="row top">
+                    <div class="col-xl-6">
+                        <div class="about-style1-content style3">
+                            <div class="sec-title">
+                                <p>A propos de </p>
+                                <div class="big-title"><h1>Notre Musée</h1></div>
+                            </div>
+                            <div class="inner-content">
+                                <h3>Fondé en 1965 en tant qu'institution éducative basée à Londres, le Musée d'Art et
+                                    d'Histoire s'engage à produire des expositions distinctives et des programmes
+                                    publics sur l'art asiatique.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="about-style1-content right-content style3">
+                            <div class="inner-content">
+                                <div class="text">Nous utilisons nos collections uniques et notre expertise inégalée
+                                    pour relever les plus grands défis auxquels le monde est confronté aujourd'hui. Nous
+                                    prenons soin de plus de 200 000 objets exposés couvrant des milliards d'années et
+                                    accueillons plus de cinq millions de visiteurs chaque année.
+                                </div>
+                                <div class="bottom-box">
+                                    <div class="button">
+                                        <a class="btn-one" href="#">En Savoir Plus</a>
+                                    </div>
+                                    <div class="phone-number">
+                                        <div class="icon"><span class="flaticon-phone-1"></span></div>
+                                        <div class="title">
+                                            <span>Contactez nous:</span>
+                                            <h1><a href="tel:16234569400">70 700 700</a></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--End About Style3 Area-->
+
+        <!--Start Exhibitions Style3 Area-->
+        <section class="exhibitions-style3-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="exhibitions-carousel-style2 owl-carousel owl-theme owl-nav-style-one">
+                            <!--Start Single Exhibition Box Style3-->
+                            <div class="single-exhibition-box-style3">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/resources/exhibition-v3-1.jpg') }}" loading="lazy"
+                                             alt="Awesome Image">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="text-box">
+                                        <span>Exhibition</span>
+                                        <h3><a href="#">le Château de Saint-Germain</a></h3>
+                                        <p>du 6 juin 2023 au 10 juin 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Single Exhibition Box Style3-->
+                            <!--Start Single Exhibition Box Style3-->
+                            <div class="single-exhibition-box-style3">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/resources/exhibition-v3-2.jpg') }}" loading="lazy"
+                                             alt="Awesome Image">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="text-box">
+                                        <span>Exhibition</span>
+                                        <h3><a href="#">Présentation de Thesis </a></h3>
+                                        <p>Du 12 Juin 2023 au 16 Juin 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Single Exhibition Box Style3-->
+                            <!--Start Single Exhibition Box Style3-->
+                            <div class="single-exhibition-box-style3">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/resources/exhibition-v3-3.jpg') }}" loading="lazy"
+                                             alt="Awesome Image">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="text-box">
+                                        <span>Collection</span>
+                                        <h3><a href="#">Indépendance brute : Antiquité japonaise</a></h3>
+                                        <p>du 20 juin 2023 au 01 juillet 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Single Exhibition Box Style3-->
+                            <!--Start Single Exhibition Box Style3-->
+                            <div class="single-exhibition-box-style3">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/resources/exhibition-v3-1.jpg') }}" loading="lazy"
+                                             alt="Awesome Image">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="text-box">
+                                        <span>Exhibition</span>
+                                        <h3><a href="#">The Museum is Located in St- Germain Castle</a></h3>
+                                        <p>From 6 Sept 2017 until 7 Jan 2018</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Single Exhibition Box Style3-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Exhibitions Style3 Area-->
+
+        <!--Start Fact Testimonial Area-->
+
+        <!--Start subscribe Area-->
+        <section class="subscribe-area style4">
+            <div class="layer-outer" data-aos="zoom-in-down" data-aos-easing="linear" data-aos-duration="5500"
+                 style="background-image:url({{ asset('images/pattern/subscribe-bg.png') }});"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="welcome-content style2">
+                            <div class="sec-title">
+                                <p>Bienvenue au Musée remplie d'Histoires</p>
+                                <div class="big-title"><h1>Inscrivez-vous pour recevoir<br> des mises à jour sur des<br>
+                                        Ateliers, des Artistes<br> ou encore des Événements.
+                                    </h1></div>
+                            </div>
+                            <div class="subscribe-box">
+                                <form class="subscribe-form" id="subscribeform"
+                                      action="{{ path('app_front_home_subscribenews') }}">
+                                    <label>
+                                        <input type="email" name="email" placeholder="Votre adresse Email" required>
+                                    </label>
+                                    <button type="submit">S'abonner</button>
+                                    <div class="types">
+                                        <ul>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" name="newsType1" value="EVENTS" required>
+                                                </label>
+                                                <span>Événements</span>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" name="newsType2" value="WORKSHOPS" required>
+                                                </label>
+                                                <span>Ateliers</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="text">
+                                Nous traiterons les données personnelles que vous avez fournies conformément à notre  <a href="#">politique de confidentialité.</a>  Vous pouvez vous désabonner ou modifier vos préférences à tout moment en cliquant sur le lien figurant dans tous les e-mails.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--End subscribe Area-->
+
+        <!--Start Art Style4 Area-->
+        <section class="art-style4-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="sec-title">
+                            <p>Oeuvres D'Art</p>
+                            <div class="big-title"><h1>les Collection</h1></div>
+                            <div class="text">
+                                Aidez-nous à transformer des vies grâce au pouvoir de la science et de l'éducation scientifique - à l'intérieur du musée, dans nos écoles et même au-delà...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="art-carousel-style2 owl-carousel owl-theme owl-nav-style-one">
+                            <!--Start Single Art Box Style2-->
+                            <div class="single-art-box-style2">
+                                <div class="img-holder">
+                                    <img src="{{ asset('images/art/art-v2-1.jpg') }}" alt="Awesome Image"
+                                         loading="lazy">
+                                    <div class="overlay-content"></div>
+                                </div>
+                                <div class="text-holder">
+                                    <h3><a href="#">Mystères du Prince Shōtoku</a></h3>
+                                    <span>Tankha Atska</span>
+                                </div>
+                            </div>
+                            <!--End Single Art Box Style2-->
+                            <!--Start Single Art Box Style2-->
+                            <div class="single-art-box-style2">
+                                <div class="img-holder">
+                                    <img src="{{ asset('images/art/art-v2-2.jpg') }}" alt="Awesome Image"
+                                         loading="lazy">
+                                    <div class="overlay-content"></div>
+                                </div>
+                                <div class="text-holder">
+                                    <h3><a href="#">Germanian Grothery</a></h3>
+                                    <span>Tankha Atska</span>
+                                </div>
+                            </div>
+                            <!--End Single Art Box Style2-->
+                            <!--Start Single Art Box Style2-->
+                            <div class="single-art-box-style2">
+                                <div class="img-holder">
+                                    <img src="{{ asset('images/art/art-v2-3.jpg') }}" alt="Awesome Image"
+                                         loading="lazy">
+                                    <div class="overlay-content"></div>
+                                </div>
+                                <div class="text-holder">
+                                    <h3><a href="#">Renaissance à la Révolution</a></h3>
+                                    <span>Tommy Martinez</span>
+                                </div>
+                            </div>
+                            <!--End Single Art Box Style2-->
+                            <!--Start Single Art Box Style2-->
+                            <div class="single-art-box-style2">
+                                <div class="img-holder">
+                                    <img src="{{ asset('images/art/art-v2-4.jpg') }}" alt="Awesome Image"
+                                         loading="lazy">
+                                    <div class="overlay-content"></div>
+                                </div>
+                                <div class="text-holder">
+                                    <h3><a href="#">Antiquités japonaises</a></h3>
+                                    <span>Linda M. Dugan</span>
+                                </div>
+                            </div>
+                            <!--End Single Art Box Style2-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Art Style4 Area-->
+
+        <!--Start Partner Area Style3-->
+        {#        <section class="partner-style3-area"> #}
+        {#            <div class="layer-outer"></div> #}
+        {#            <div class="container"> #}
+        {#                <div class="sec-title text-center"> #}
+        {#                    <p>PART OF THE MUSEUM</p> #}
+        {#                    <div class="big-title"><h1>Our Partners & Sponsers</h1></div> #}
+        {#                </div> #}
+        {#                <div class="row"> #}
+        {#                    <div class="col-xl-12"> #}
+        {#                        <div class="partner-box"> #}
+        {#                            <!--Start Single Partner Logo Box--> #}
+        {#                            <div class="single-partner-logo-box"> #}
+        {#                                <a href="#"><img src="images/brand/1.png" alt="Awesome Image"></a> #}
+        {#                            </div> #}
+        {#                            <!--End Single Partner Logo Box--> #}
+        {#                            <!--Start Single Partner Logo Box--> #}
+        {#                            <div class="single-partner-logo-box"> #}
+        {#                                <a href="#"><img src="images/brand/2.png" alt="Awesome Image"></a> #}
+        {#                            </div> #}
+        {#                            <!--End Single Partner Logo Box--> #}
+        {#                            <!--Start Single Partner Logo Box--> #}
+        {#                            <div class="single-partner-logo-box"> #}
+        {#                                <a href="#"><img src="images/brand/3.png" alt="Awesome Image"></a> #}
+        {#                            </div> #}
+        {#                            <!--End Single Partner Logo Box--> #}
+        {#                            <!--Start Single Partner Logo Box--> #}
+        {#                            <div class="single-partner-logo-box"> #}
+        {#                                <a href="#"><img src="images/brand/4.png" alt="Awesome Image"></a> #}
+        {#                            </div> #}
+        {#                            <!--End Single Partner Logo Box--> #}
+        {#                            <!--Start Single Partner Logo Box--> #}
+        {#                            <div class="single-partner-logo-box"> #}
+        {#                                <a href="#"><img src="images/brand/5.png" alt="Awesome Image"></a> #}
+        {#                            </div> #}
+        {#                            <!--End Single Partner Logo Box--> #}
+        {#                        </div> #}
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#        </section> #}
+        <!--End Partner Area Style3-->
+
+
+        <!--Start latest blog Style4 area -->
+        <section class="latest-blog-style4-area">
+            <div class="container">
+                <div class="sec-title text-center">
+                    <p>Nos dernières nouvelles</p>
+                    <div class="big-title"><h1>Interviews & Publications</h1></div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="blog-carousel-style3 owl-carousel owl-theme owl-nav-style-one">
+                            <!--Start single blog post-->
+                            <div class="single-blog-post-style2 style3 wow fadeInLeft" data-wow-delay="0ms"
+                                 data-wow-duration="1500ms">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/blog/latest-b-v1-1.jpg') }}" alt="Awesome Image"
+                                             loading="lazy">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="title-holder">
+                                        <ul class="meta-info">
+                                            <li><a href="#">Janvier 12, 2024</a></li>
+                                            <li><a href="#">03 Comments</a></li>
+                                        </ul>
+                                        <h3 class="blog-title"><a href="blog-single.html">
+                                                Événements artistiques à ne pas manquer à la ville<br> de Londres</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End single blog post-->
+                            <!--Start single blog post-->
+                            <div class="single-blog-post-style2 style3 wow fadeInLeft" data-wow-delay="0ms"
+                                 data-wow-duration="1500ms">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/blog/latest-b-v1-2.jpg') }}" alt="Awesome Image"
+                                             loading="lazy">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="title-holder">
+                                        <ul class="meta-info">
+                                            <li><a href="#">January 12, 2019</a></li>
+                                            <li><a href="#">03 Comments</a></li>
+                                        </ul>
+                                        <h3 class="blog-title"><a href="blog-single.html">Looking Forward: The Phasrasth<br>
+                                                and Kenyard</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End single blog post-->
+                            <!--Start single blog post-->
+                            <div class="single-blog-post-style2 style3 wow fadeInLeft" data-wow-delay="0ms"
+                                 data-wow-duration="1500ms">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ asset('images/blog/latest-b-v1-1.jpg') }}" alt="Awesome Image"
+                                             loading="lazy">
+                                        <div class="overlay-style-one bg1"></div>
+                                    </div>
+                                    <div class="title-holder">
+                                        <ul class="meta-info">
+                                            <li><a href="#">January 12, 2019</a></li>
+                                            <li><a href="#">03 Comments</a></li>
+                                        </ul>
+                                        <h3 class="blog-title"><a href="blog-single.html">Art Events to Attend in the
+                                                City<br> of London</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End single blog post-->
+
+                        </div>
+
+                        <div class="view-more-button text-center">
+                            <a class="btn-two" href="#">View More</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End latest blog Style4 area-->
+
+
+        <!--Start footer Style4 area-->
+        <footer class="footer-style4-area">
+            <div class="layer-outer-bg"
+                 style="background-image:url({{ asset('images/parallax-background/footer-style4-bg.jpg') }} );"></div>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <!--Start single footer widget-->
+                        <div class="col-xl-5 col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="100ms">
+                            <div class="single-footer-widget-style3 marbtm60">
+                                <div class="our-contact-info-box">
+                                    <div class="footer-logo">
+                                        <a href="index.html"><img src="{{ asset('images/resources/logo-2.png') }}"
+                                                                  alt="Footer Logo"></a>
+                                    </div>
+                                    <div class="text">
+                                        <ul>
+                                            <li>
+                                                <div class="icon">
+                                                    <span class="flaticon-placeholder"></span>
+                                                </div>
+                                                <div class="title-holder">
+                                                    <h5> Tunis, Tunisie</h5>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="icon">
+                                                    <span class="flaticon-clock"></span>
+                                                </div>
+                                                <div class="title-holder">
+                                                    <h5>Tous les Jours de 9h30 à 18h00<br> Fermé les Dimanches</h5>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="icon">
+                                                    <span class="flaticon-call"></span>
+                                                </div>
+                                                <div class="title-holder">
+                                                    <h5>
+                                                        <a href="tel:16234569400">70 700 700</a><br>
+                                                        <a href="mailto:info@templatepath.com">contact.musego@gmail.com</a>
+                                                    </h5>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End single footer widget-->
+
+                        <!--Start single footer widget-->
+                        {#                        <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="100ms"> #}
+                        {#                            <div class="single-footer-widget-style3"> #}
+                        {#                                <div class="title"> #}
+                        {#                                    <h3>Get In Touch Now :-</h3> #}
+                        {#                                </div> #}
+                        {#                                <div class="touch-form-box"> #}
+
+                        {#                                    {{ form_start(form) }} #}
+                        {#                                    <div class="row"> #}
+                        {#                                        <div class="col-xl-6"> #}
+                        {#                                            <div class="input-box"> #}
+                        {#                                                {{ form_widget(form.name) }} #}
+                        {#                                            </div> #}
+                        {#                                        </div> #}
+                        {#                                        <div class="col-xl-6"> #}
+                        {#                                            <div class="input-box"> #}
+                        {#                                                {{ form_widget(form.email) }} #}
+
+                        {#                                            </div> #}
+                        {#                                        </div> #}
+                        {#                                    </div> #}
+                        {#                                    <div class="row"> #}
+                        {#                                        <div class="col-xl-12"> #}
+                        {#                                            {{ form_widget(form.message) }} #}
+                        {#                                        </div> #}
+                        {#                                    </div> #}
+                        {#                                    <div class="row"> #}
+                        {#                                        <div class="col-xl-12"> #}
+                        {#                                            <div class="button-box"> #}
+                        {#                                                {{ form_widget(form.send) }} #}
+                        {#                                            </div> #}
+                        {#                                        </div> #}
+                        {#                                    </div> #}
+                        {#                                    {{ form_end(form) }} #}
+                        {#                                </div> #}
+
+
+                        {#                            </div> #}
+                        {#                        </div> #}
+                        <!--End single footer widget-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-style4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="footer-bottom-content">
+                                <div class="copyright-text">
+                                    <p>© Copyright 2019 MuseGo. All Rights Reserved</p>
+                                </div>
+                                <div class="footer-social-links">
+                                    <ul class="social-links-style1">
+                                        <li>
+                                            <a href="https://www.facebook.com/profile.php?id=100090616883418"><i
+                                                        class="fa fa-facebook" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="mailto:contact.musego@gmail.com"><i class="fa fa-envelope"
+                                                                                         aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!--End footer Style4 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('libs/toastr/build/toastr.min.js') }}"></script>
+
+    <script>$(document).ready(function () {
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-full-width",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            var requiredCheckboxes = $('.types :checkbox[required]');
+            requiredCheckboxes.change(function () {
+                if (requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                } else {
+                    requiredCheckboxes.attr('required', 'required');
+                }
+            });
+
+            $("#subscribeform").on("submit", function (event) {
+                event.preventDefault();
+
+                var formValues = $(this).serialize();
+                var actionUrl = $(this).attr("action");
+                if (!$(this).valid) return false;
+
+                $.post(actionUrl, formValues, function (data) {
+                    toastr["success"]("Your are now subscribed to our news letter");
+                    document.getElementById("subscribeform").reset();
+                });
+            });
+        });</script>
+{% endblock %}

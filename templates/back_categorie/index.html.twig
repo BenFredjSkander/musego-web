@@ -1,0 +1,185 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Liste des categories'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Contacts', title: 'Liste des categories'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <a href="{{ path('app_back_categories_add') }}"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="mdi mdi-plus me-2"></i> Ajouter</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <form id="search-form"
+                                                          action="{{ path('app_back_categories_categoriesSearch') }}"
+                                                          method="GET">
+                                                        <label for="search-input"
+                                                               class="visually-hidden">Rechercher</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-text mdi mdi-magnify"></div>
+                                                            <input type="text" class="form-control" id="search-input"
+                                                                   name="query" placeholder="Rechercher...">
+                                                        </div>
+                                                    </form>
+                                                    <div id="search-results"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-centered table-nowrap mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th scope="col" style="width: 200px;">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for categorie in categories %}
+
+                                            <tr>
+                                                <td>{{ categorie.nom }}</td>
+                                                <td>{{ categorie.description }}</td>
+                                                <td><img src="{{ asset(categorie.image) }}" alt="{{ categorie.nom }}"
+                                                         width="100" height="100"></td>
+
+                                                <td>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path('app_back_categories_update', {'id':categorie.id}) }}"
+                                                               class="px-2 text-primary"><i
+                                                                        class="uil uil-pen font-size-18"></i></a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path('app_back_categories_delete', {'id':categorie.id}) }}"
+                                                               class="px-2 text-danger"><i
+                                                                        class="uil uil-trash-alt font-size-18"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tbody id="searchtab">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% block javascripts %}
+    <script>
+        const searchInput = document.querySelector('#search-input');
+        const searchResults = document.querySelector('#search-results');
+        const tableRows = document.querySelectorAll('.search-result');
+
+        function searchCategories(searchTerm) {
+            if (searchTerm.trim().length === 0) {
+                searchResults.innerHTML = '';
+
+                return;
+            }
+
+            fetch('{{ path('app_back_categories_categoriesSearch') }}?query=' + searchTerm, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    let resultsHtml = '';
+                    data.forEach((categorie) => {
+                        const dateCreation = new Date(categorie.dateCreation);
+                        const formattedDate = dateCreation.toLocaleDateString('fr-FR');
+                        resultsHtml += `<div>
+<h2>Resultat de la recherche</h2>
+                                <h2>Titre: ${categorie.nom}</h2>
+                                <p>Description: ${categorie.description}</p>
+                            </div>`;
+                    });
+                    searchResults.innerHTML = resultsHtml;
+                })
+                .catch(error => console.log(error));
+        }
+
+        searchInput.addEventListener('input', (event) => {
+            const searchTerm = event.target.value.trim();
+            searchCategories(searchTerm);
+        });
+
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const searchTerm = event.target.value.trim();
+
+                searchCategories(searchTerm);
+            }
+        });
+
+
+    </script>
+{% endblock %}
+
+</body>
+</html>

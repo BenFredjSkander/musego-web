@@ -1,0 +1,80 @@
+version: "3"
+
+services:
+  db:
+    container_name: musego-db
+    restart: always
+    image: mysql:8.0.23
+    platform: linux/x86_64
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - "db_app:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - musego-network
+  php:
+    container_name: musego-php
+    restart: always
+    build:
+      context: ./php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ../:/var/www/symfony/
+    networks:
+      - musego-network
+  nginx:
+    container_name: musego-nginx
+    restart: always
+    build:
+      context: ./nginx
+    volumes:
+      - ../:/var/www/symfony/
+      - /home/adminuser/certbot/www:/var/www/certbot/:ro
+      - /home/adminuser/certbot/conf/:/etc/nginx/ssl/:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - musego-network
+    env_file:
+      - .env.nginx.local
+    depends_on:
+      - db
+      - redis
+      - php
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /home/adminuser/certbot/www/:/var/www/certbot/:rw
+      - /home/adminuser/certbot/conf/:/etc/letsencrypt/:rw
+  redis:
+    container_name: musego-redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - musego-network
+  grafana:
+    container_name: musego-grafana
+    image: grafana/grafana:9.5.1
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - musego-network
+volumes:
+  db_app:
+  grafana-data:
+
+networks:
+  musego-network:

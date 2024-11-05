@@ -1,0 +1,135 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Datatables'}) }}
+
+    <!-- DataTables -->
+    <link href="/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Responsive datatable examples -->
+    <link href="/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Tables', title: 'Datatables'}) }}
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="card-title">Liste des contacts</h4>
+
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                                       style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col" style="width: 200px;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for contact in contacts %}
+                                        <tr>
+                                            <td>{{ contact.email }}</td>
+                                            <td>{% if contact.attributes.NEWSTYPE == 'ALL' %}
+                                                <span class="badge bg-soft-success font-size-12">{{ contact.attributes.NEWSTYPE }}</span>
+                                            </td>
+                                            {% elseif contact.attributes.NEWSTYPE == 'EVENTS' %}
+                                                <span class="badge bg-soft-info font-size-12">{{ contact.attributes.NEWSTYPE }}</span>
+                                            {% else %}
+                                                <span class="badge bg-soft-purple font-size-12">{{ contact.attributes.NEWSTYPE }}</span>
+                                            {% endif %}
+                                            <td>
+                                                <ul class="list-inline mb-0">
+                                                    {#                                                    <li class="list-inline-item"> #}
+                                                    {#                                                        <a href="javascript:void(0);" class="px-2 text-primary"><i #}
+                                                    {#                                                                    class="uil uil-pen font-size-18"></i></a> #}
+                                                    {#                                                    </li> #}
+                                                    <li class="list-inline-item">
+                                                        <a href="{{ path('app_back_newsletter_contacts_delete', {'email':contact.email}) }}"
+                                                           class="px-2 text-danger"><i
+                                                                    class="uil uil-trash-alt font-size-18"></i></a>
+                                                    </li>
+                                                    {#                                                    <li class="list-inline-item dropdown"> #}
+                                                    {#                                                        <a class="text-muted dropdown-toggle font-size-18 px-2" #}
+                                                    {#                                                           href="#" #}
+                                                    {#                                                           role="button" data-bs-toggle="dropdown" #}
+                                                    {#                                                           aria-haspopup="true"> #}
+                                                    {#                                                            <i class="uil uil-ellipsis-v"></i> #}
+                                                    {#                                                        </a> #}
+
+                                                    {#                                                        <div class="dropdown-menu dropdown-menu-end"> #}
+                                                    {#                                                            <a class="dropdown-item" href="#">Action</a> #}
+                                                    {#                                                            <a class="dropdown-item" href="#">Another action</a> #}
+                                                    {#                                                            <a class="dropdown-item" href="#">Something else #}
+                                                    {#                                                                here</a> #}
+                                                    {#                                                        </div> #}
+                                                    {#                                                    </li> #}
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- Required datatable js -->
+<script src="/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+
+<!-- Responsive examples -->
+<script src="/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/js/pages/datatables.init.js"></script>
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>

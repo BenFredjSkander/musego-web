@@ -1,0 +1,203 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Datatables'}) }}
+
+    <!-- DataTables -->
+    <link href="/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Responsive datatable examples -->
+    <link href="/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+
+        <div class="main-content" style="width: 50%; height: 50%;">
+
+            <div class="page-content">
+                <canvas id="myChart2"></canvas>
+            </div>
+
+            <!-- Importation de Chart.js pour générer le graphique -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js" style="width: 300px; height: 300px;"></script>
+
+            <script>
+                // Récupérer les données passées depuis le contrôleur
+                var data = {{ data_participation|raw }};
+
+                // Créer une instance de la classe Chart
+                var ctx = document.getElementById('myChart2').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: 'Nombre de participants',
+                            data: Object.values(data),
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+
+                        title: { // Ajouter l'option title avec le texte souhaité
+                            display: true,
+                            text: 'Nombre de participants par  événement'
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+
+            </script>
+
+        </div>
+        <!-- end main content-->
+        <!-- End Page-content -->
+
+
+        <div class="main-content" style="width: 50%; height: 50%;">
+
+            <div class="page-content">
+                <canvas id="myChart3"></canvas>
+            </div>
+
+            <!-- Importation de Chart.js pour générer le graphique -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js" style="width: 300px; height: 300px;"></script>
+
+            <script>
+                var data1 = {{ data_participation|raw }};
+
+                // Créer une instance de la classe Chart pour le premier graphique
+                var ctx1 = document.getElementById('myChart2').getContext('2d');
+                var myChart1 = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(data1),
+                        datasets: [{
+                            label: 'Nombre de participants',
+                            data: Object.values(data1),
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Nombre de participants par événement'
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+
+
+                //2 eme graphe//////
+                var data2 = {{ data_participation|raw }};
+
+                var ctx2 = document.getElementById('myChart3').getContext('2d');
+                var myChart2 = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(data2),
+                        datasets: [{
+                            data: Object.values(data2),
+                            backgroundColor: [
+                                // Définir les couleurs des segments du cercle
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                // Définir les couleurs des bordures des segments du cercle
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text:
+                                'Répartition des participants par catégorie'
+                        },
+// Ajouter d'autres options spécifiques au graphique en cercle si nécessaire
+                    }
+                });
+
+            </script>
+
+        </div>
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+
+{# <!-- Required datatable js --> #}
+{# <script src="/libs/datatables.net/js/jquery.dataTables.min.js"></script> #}
+{# <script src="/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script> #}
+{# <!-- Buttons examples --> #}
+{# <script src="/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script> #}
+{# <script src="/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script> #}
+{# <script src="/libs/jszip/jszip.min.js"></script> #}
+{# <script src="/libs/pdfmake/build/pdfmake.min.js"></script> #}
+{# <script src="/libs/pdfmake/build/vfs_fonts.js"></script> #}
+{# <script src="/libs/datatables.net-buttons/js/buttons.html5.min.js"></script> #}
+{# <script src="/libs/datatables.net-buttons/js/buttons.print.min.js"></script> #}
+{# <script src="/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script> #}
+
+<!-- Responsive examples -->
+<script src="/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/js/pages/datatables.init.js"></script>
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Offres{% endblock %}
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+
+        {{ breadcrumb.input('images/rami/forest_header_rami.jpg', 'Nos offres', 'Offres') }}
+        <!--End breadcrumb area-->
+
+        <!--Start Buy Tickets Area-->
+        <section class="buy-tickets-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="buy-tickets-content">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="sec-title">
+                                        <div class="big-title"><h1>Nos Offres d'abonnement</h1></div>
+                                    </div>
+                                    <div class="visit-day-select">
+                                        <h3>Pour bénéficier de nos services, veuillez choisir une offre qui vous convient</h3>
+                                        <div class="visit-day-tab tabs-box">
+                                            <ul class="tab-btns tab-buttons text-center clearfix">
+                                                <li data-tab="#promo" class="tab-btn"><span>Avec promotion</span></li>
+                                                <li data-tab="#nopromo" class="tab-btn"><span>Classique</span></li>
+                                            </ul>
+                                            <div class="tabs-content">
+                                                <div class="tab active-tab" id="promo">
+                                                    <h4>Offres avec promotion ({{ offrespromo }} offres)</h4>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            {% if offrespromo == 0 %}
+
+                                                                <!-- test if the count of offres is 0 so that a message is displayed -->
+                                                                <div class="col-xl-6">
+                                                                    <h2>Pas d'offres disponibles pour le moment... Revenez ultérieurement.</h2>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <img src="{{ asset('images/coming-soon-img.png') }}" width="400px" height="400px" alt="coming soon">
+                                                                </div>
+                                                            {% elseif offrespromo > 0 and offrespromo < 4 %}
+                                                                <!-- test if the count of offres is less than 4 so that auto swipe won't funtion -->
+                                                                {% for offre in offres %}
+                                                                    {% if offre.promotion != 0 and date(offre.dateFin)>date() %}
+                                                                        <div class="card col-md-4 masonry-item all art insta">
+                                                                            <img class="card-img-top img-thumbnail m-auto" src="{{ offre.image }}" alt="Image offre" style="width: 50%;height: 200px">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Titre: {{ offre.type }}</h4>
+                                                                                <p class="card-text">Description: {{ offre.description}}</p>
+                                                                                <ul class="list-group list-group-flush">
+
+                                                                                    <li class="list-group-item">Prix: {{ offre.prix }}€</li>
+                                                                                    <li class="list-group-item">Promotion: {{ offre.promotion }} %</li>
+                                                                                    <li class="list-group-item">Date debut: {{ offre.dateDebut|date }}</li>
+                                                                                    <li class="list-group-item">Date fin: {{ offre.dateFin|date }}</li>
+
+                                                                                </ul>
+                                                                                {% if app.user is null %}
+                                                                                    <div class="button">
+                                                                                        <a class="btn-one" href="{{ path('app_login') }}">Connectez-vous pour vous Abonner</a>
+                                                                                    </div>
+                                                                                {% else %}
+                                                                                    <div class="button">
+                                                                                        <a class="btn-one" href="{{ path('app_front_offre_show', {'id': offre.id}) }}">En savoir plus</a>
+                                                                                    </div>
+
+                                                                                {% endif %}
+                                                                            </div><!-- end cardbody -->
+                                                                        </div>
+                                                                    {% else %}
+
+                                                                        <!--<p>Pas d'offres pour le moment.. veuillez attendre nos actualités</p>-->
+                                                                    {% endif %}
+                                                                {% endfor %}
+
+                                                            {% else %}
+                                                                <!-- test if the count of offres is more than 4 so that auto swipe will funtion -->
+                                                            <div class="col-xl-12">
+                                                                <div class="exhibitions-carousel-style2 owl-carousel owl-theme owl-nav-style-one">
+
+                                                                {% for offre in offres %}
+
+                                                                    {% if offre.promotion != 0 and date(offre.dateFin)>date() %}
+                                                                        <div class="card col-md-12 masonry-item all art insta">
+                                                                        <img class="card-img-top img-thumbnail m-auto" src="{{ offre.image }}" alt="Image offre" style="width: 50%;height: 200px">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Titre: {{ offre.type }}</h4>
+                                                                            <p class="card-text">Description: {{ offre.description}}</p>
+                                                                            <ul class="list-group list-group-flush">
+
+                                                                                <li class="list-group-item">Prix: {{ offre.prix }}€</li>
+                                                                                    <li class="list-group-item">Promotion: {{ offre.promotion }} %</li>
+                                                                                    <li class="list-group-item">Date debut: {{ offre.dateDebut|date }}</li>
+                                                                                    <li class="list-group-item">Date fin: {{ offre.dateFin|date }}</li>
+
+                                                                            </ul>
+                                                                            {% if app.user is null %}
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_login') }}">Connectez-vous pour vous Abonner</a>
+                                                                                </div>
+                                                                                {% else %}
+                                                                                    <div class="button">
+                                                                                        <a class="btn-one" href="{{ path('app_front_offre_show', {'id': offre.id}) }}">En savoir plus</a>
+                                                                                    </div>
+
+                                                                            {% endif %}
+                                                                        </div><!-- end cardbody -->
+                                                                    </div>
+                                                                        {% else %}
+
+                                                                            <!--<p>Pas d'offres pour le moment.. veuillez attendre nos actualités</p>-->
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                <!-- end card -->
+                                                    </div>
+                                                            </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab" id="nopromo">
+                                                    <h4>Offres sans promotion ({{ offresnopromo }} offres)</h4>
+
+                                                    <div class="container">
+                                                        <div class="row">
+
+                                                            {% if offresnopromo == 0 %}
+
+                                                                <!-- test if the count of offres is 0 so that a message is displayed -->
+                                                            <div class="col-xl-6">
+                                                                <h2>Pas d'offres disponibles pour le moment... Revenez ultérieurement.</h2>
+                                                            </div>
+                                                            <div class="col-xl-6">
+                                                                <img src="{{ asset('images/coming-soon-img.png') }}" width="400px" height="400px" alt="coming soon">
+                                                            </div>
+                                                            {% elseif offresnopromo > 0 and offresnopromo < 4 %}
+                                                            <!-- test if the count of offres is less than 4 so that auto swipe won't funtion -->
+                                                            {% for offre in offres %}
+                                                                {% if offre.promotion == 0%}
+                                                                    <div class="card col-md-4 masonry-item all art insta">
+                                                                        <img class="card-img-top img-thumbnail m-auto" src="{{ offre.image }}" alt="Image offre" style="width: 50%;height: 200px">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Titre: {{ offre.type }}</h4>
+                                                                            <p class="card-text">Description: {{ offre.description}}</p>
+                                                                            <ul class="list-group list-group-flush">
+
+                                                                                <li class="list-group-item">Prix: {{ offre.prix }}€</li>
+
+                                                                            </ul>
+                                                                            {% if app.user is null %}
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_login') }}">Connectez-vous pour vous Abonner</a>
+                                                                                </div>
+                                                                            {% else %}
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_front_offre_show', {'id': offre.id}) }}">En savoir plus</a>
+                                                                                </div>
+
+                                                                            {% endif %}
+                                                                        </div><!-- end cardbody -->
+                                                                    </div>
+                                                                {% else %}
+
+                                                                    <!--<p>Pas d'offres pour le moment.. veuillez attendre nos actualités</p>-->
+                                                                {% endif %}
+                                                            {% endfor %}
+
+                                                            {% else %}
+                                                            <div class="col-xl-12">
+                                                                <div class="exhibitions-carousel-style2 owl-carousel owl-theme owl-nav-style-one">
+
+                                                                {% for offre in offres %}
+
+                                                                    {% if offre.promotion == 0 %}
+                                                                    <div class="card col-md-12 masonry-item all art insta">
+                                                                        <img class="card-img-top img-thumbnail m-auto" src="{{ offre.image }}" alt="Image offre" style="width: 50%;height: 200px">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Titre: {{ offre.type }}</h4>
+                                                                            <p class="card-text">Description: {{ offre.description}}</p>
+                                                                            <ul class="list-group list-group-flush">
+
+                                                                                <li class="list-group-item">Prix: {{ offre.prix }}€</li>
+
+                                                                            </ul>
+                                                                            {% if app.user is null %}
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_login') }}">Connectez-vous pour vous Abonner</a>
+                                                                                </div>
+                                                                            {% else %}
+                                                                                <div class="button">
+                                                                                    <a class="btn-one" href="{{ path('app_front_offre_show', {'id': offre.id}) }}">En savoir plus</a>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                        </div><!-- end cardbody -->
+                                                                    </div>
+                                                                        {% else %}
+
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                <!-- end card -->
+                                                            </div>
+                                                            </div><!-- end card-group -->
+
+                                                            {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        <!--End Buy Tickets Area-->
+
+
+        <!--Start Partner Area Style3-->
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+{% endblock %}

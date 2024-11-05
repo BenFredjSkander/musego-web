@@ -1,0 +1,182 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Liste des Ateliers'}) }}
+
+    <link href="{{ asset('/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Contacts', title: 'Liste des Ateliers'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+
+                                            <a href="{{ path('app_back_atelier_add') }}"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="mdi mdi-plus me-2"></i> Ajouter Atelier</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <input type="text" id="search"
+                                                           class="form-control rounded bg-light border-0"
+                                                           placeholder="Search...">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-centered table-nowrap mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>nom</th>
+                                            <th>Date de Création</th>
+                                            <th>Image</th>
+                                            <th>Action</th>
+
+                                        </tr>
+
+                                        </thead>
+                                        <tbody id="all">
+                                        {% for p in pagination %}
+                                            <tr>
+                                                <td>{{ p.nom }}</td>
+                                                <td>{{ p.createdAt|date }}</td>
+                                                <td><a class="image-popup-no-margins" href="{{ p.image }}">
+                                                        <img class="img-fluid" alt="" src="{{ p.image }}" width="75">
+                                                    </a>
+
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path ('app_back_atelier_update',{'id':p.id}) }}"
+                                                               class="px-2 text-primary"><i
+                                                                        class="uil uil-pen font-size-18"></i></a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path ('app_back_atelier_delete',{'id':p.id}) }}"
+                                                               class="px-2 text-danger"><i
+                                                                        class="uil uil-trash-alt font-size-18"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tbody id="searchtab"></tbody>
+                                    </table>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="float-sm-end">
+                                            <ul class="pagination mb-sm-0">
+                                                {{ knp_pagination_render(pagination) }}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+
+<script src="{{ asset('/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+<script src="{{ asset('/js/pages/lightbox.init.js') }}"></script>
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#search").keyup(function (e) {
+            var value = $(this).val();
+            $.ajax({
+                url: "{{ path('app_back_atelier_SearchAteliers') }}",
+                type: 'GET',
+                data: {
+                    'query': value
+                },
+                success: function (retour) {
+                    if (retour.length) {
+                        console.log(JSON.stringify(retour))
+                        $("#searchtab").empty();
+                        $.each(JSON.parse(retour), function (i, obj) {
+                            console.log(obj.roles);
+                            var active;
+                            var role;
+
+                            $("#all").hide();
+                            $("#searchtab").append('<tr><td> ' + obj.nom + '  </td><td>    ' + moment(obj.createdAt).format('MMMM Do YYYY, h:mm:ss') + '  </td>  <td> <a class="image-popup-no-margins" href="' + obj.image + '"><img class="img-fluid" alt="" src="' + obj.image + '" width="75"></a> </td><td> <ul class="list-inline mb-0"> <li class="list-inline-item"> <a href="/back/atelier/edit/' + obj.id + '" class="px-2 text-primary"><i class="uil uil-pen font-size-18"></i></a> </li> <li class="list-inline-item"> <a href="/back/atelier/delete/' + obj.id + '" class="px-2 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a> </li> </ul> </td></tr>');
+                        });
+                    } else {
+                        $("#all").show();
+                        $("#searchtab").empty();
+                        $("#searchtab").fadeIn('fast');
+                    }
+                },
+            });
+            return false;
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

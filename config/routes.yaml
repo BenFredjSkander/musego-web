@@ -1,0 +1,30 @@
+controllers:
+  resource: ../src/Controller/
+  type: annotation
+
+kernel:
+  resource: ../src/Kernel.php
+  type: annotation
+
+api_login_check:
+  path: /api/login
+
+app.swagger_ui:
+  path: /api/doc
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+api_token_refresh:
+  path: /api/token/refresh
+  controller: gesdinet.jwtrefreshtoken::refresh
+
+api_token_invalidate:
+  path: /api/token/invalidate
+
+
+#api:
+#  resource: ../src/Controller/API
+#  type: annotation
+#  prefix: /api
+#  name_prefix: api_
+#  defaults: { _format: json }

@@ -1,0 +1,137 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Les artistes{% endblock %}
+
+{% block body %}
+
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg', 'Galerie', 'Galerie') }}
+        <!--End breadcrumb area-->
+
+        <!--Start Galerie Area-->
+        <section class="gallery-area">
+
+
+            <div class="container">
+
+                <br>
+                <br>
+                <div class="sortable-masonry">
+                    <!--Filter-->
+                    {#                    <div class="filters text-center clearfix"> #}
+                    {#                        <ul class="filter-tabs filter-btns clearfix"> #}
+                    {#                            <li class="active filter" data-role="button" data-filter=".all">Show All</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".objects">Objects</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".art">Art</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".pic">Pictures</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".insta">Installation</li> #}
+                    {#                        </ul> #}
+                    {#                    </div> #}
+                    <div class="row items-container clearfix">
+                        <!--Start Single Art Box Style2-->
+
+
+                        {% if artiste is not null %}
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all objects insta">
+
+                                <div class="img-holder" style="float: left; width: 250px;">
+                                    <img src="{{ artiste.image }}" alt="{{ artiste.nom }}"
+                                         style="width: 8500px; height: 500px;">
+                                    <div class="overlay-content">
+                                        <div class="zoom-button">
+                                            <a class="lightbox-image" data-fancybox="gallery"
+                                               href="{{ artiste.image }}">
+                                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="text-holder" style="display: inline-block; margin-left:150px;">
+                                <h2>{{ artiste.nom ~ ' ' ~ artiste.prenom }}</h2>
+                                <br>
+                                <span style="font-size: 18px; font-family: Arial;"> {{ ' C est un(e) artiste ' }}</span>
+
+                                <br>
+                                <span style="font-size: 18px; font-family: Arial;"> {{ '  né(e) en ' ~ artiste.getDateNaissance()|date('Y-m-d') }}</span>
+
+                                <br>
+                                <span style="font-size: 18px; font-family: Arial;">{{ ' qui s est specialise en ' ~artiste.specialite }}</span>
+                                <br>
+                                <span style="font-size: 18px; font-family: Arial;">{{ ' de nationalite : ' ~ artiste.nationalite|country_name ~' . ' ~}}</span>
+                                <br>
+                                <span style="font-size: 18px; font-family: Arial;">{{ '  L artiste qui exprime sa vision unique du monde à travers son art.' }}</span>
+
+                            </div>
+
+                        {% else %}
+                            <!-- afficher un message d'erreur ou une page "Artiste non trouvé" -->
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Gallery Area-->
+
+        <!--Start subscribe Area-->
+        <section class="subscribe-area style3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="welcome-content">
+                            <div class="sec-title">
+                                <p>Bienvenue à MuseGo</p>
+                                <div class="big-title"><h1>Visualisez nos<br>Oeuvres
+                                    </h1></div>
+                            </div>
+                            <div class="text">
+                                Les œuvres d'art sont des trésors qui reflètent la <a href="#">richesse infinie de la créativité humaine.</a>
+                                Elles nous transportent dans un univers où l'imagination est libre de s'exprimer et où les émotions sont capturées dans des formes visuelles, des sons envoûtants ou des mots profonds.
+                            </div>
+
+                            <div class="text">
+                                Elles proviennent de différentes époques, cultures et courants artistiques, offrant ainsi<a href="#">une multitude de perspectives et de styles.</a>
+                                <br>Chaque mouvement artistique apporte sa contribution unique à l'évolution de l'art, qu'il s'agisse
+                                du réalisme captivant, de l'abstraction provocante ou du minimalisme épuré. La pluralité des formes artistiques nous
+                                permet d'explorer et de découvrir de nouvelles façons de voir le monde qui nous entoure.
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="welcome-image-box" data-aos="fade-left" data-aos-easing="linear"
+                             data-aos-duration="1500">
+                            {#                            <img src="images/resources/welcome-image.png" alt="Awesome Image"> #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End subscribe Area-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}

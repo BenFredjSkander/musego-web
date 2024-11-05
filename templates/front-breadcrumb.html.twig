@@ -1,0 +1,22 @@
+{% macro input(asset, title, text) %}
+    <section class="breadcrumb-area"
+             style="background-image: url({{ asset(asset) }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content clearfix">
+                        <div class="title">
+                            <h1>{{ title }}</h1>
+                        </div>
+                        <div class="breadcrumb-menu">
+                            <ul class="clearfix">
+                                <li><a href="{{ path('app_front_home') }}">Accueil</a></li>
+                                <li class="active">{{ text }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endmacro %}

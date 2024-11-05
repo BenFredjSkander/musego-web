@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- responsive meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{ sonata_seo_metadatas() }}
+
+
+    <link rel="stylesheet" href={{ asset('css/aos.css') }}>
+    <link rel="stylesheet" href={{ asset('css/imp.css') }}>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href={{ asset('css/custom-animate.css') }}>
+    <link rel="stylesheet" href={{ asset('css/font-awesome.min.css') }}>
+
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('css/responsive.css') }}>
+
+    {% block customCSS %}{% endblock %}
+    <!-- Favicon -->
+    <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+    <link rel="shortcut icon" href="{{ asset('icon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon/icon-72x72.png') }}" sizes="72x72">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon/icon-144x144.png') }}" sizes="144x144">
+
+    {#    <!-- Fixing Internet Explorer--> #}
+    {#    <!--[if lt IE 9]> #}
+    {#    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> #}
+    {#    <script src="js/html5shiv.js"></script> #}
+    {#    <![endif]--> #}
+
+</head>
+<body>
+{% block body %}{% endblock %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+<script src={{ asset('js/appear.js') }}></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src={{ asset('js/bootstrap-select.min.js') }}></script>
+<script src={{ asset('js/isotope.js') }}></script>
+<script src={{ asset('js/jquery.bootstrap-touchspin.js') }}></script>
+<script src={{ asset('js/jquery.countTo.js') }}></script>
+<script src={{ asset('js/jquery.easing.min.js') }}></script>
+<script src={{ asset('js/jquery.enllax.min.js') }}></script>
+<script src={{ asset('js/jquery.fancybox.js') }}></script>
+<script src={{ asset('js/jquery.mixitup.min.js') }}></script>
+<script src={{ asset('js/jquery.paroller.min.js') }}></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js></script>
+<script src={{ asset('js/validation.js') }}></script>
+<script src={{ asset('js/wow.js') }}></script>
+<script src={{ asset('js/aos.js') }}></script>
+
+<script src={{ asset('libs/language-switcher/jquery.polyglot.language.switcher.js') }}></script>
+{# <script src={{ asset('libs/timepicker/timePicker.js') }}></script> #}
+{# <script src={{ asset('libs/html5lightbox/html5lightbox.js') }}></script> #}
+<!-- jQuery ui js -->
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js></script>
+<!--Revolution Slider-->
+<script src={{ asset('libs/revolution/js/jquery.themepunch.revolution.min.js') }}></script>
+<script src={{ asset('libs//revolution/js/jquery.themepunch.tools.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.actions.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.carousel.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.kenburn.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.layeranimation.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.migration.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.navigation.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.parallax.min.js') }}></script>
+<script src={{ asset('libs/revolution/js/extensions/revolution.extension.slideanims.min.js') }}></script>
+{# <script src={{ asset('libs/revolution/js/extensions/revolution.extension.video.min.js') }}></script> #}
+<script src={{ asset('js/main-slider-script.js') }}></script>
+
+<!-- thm custom script -->
+<script src={{ asset('js/custom.js') }}></script>
+{% block customJS %}{% endblock %}
+</body>
+</html>

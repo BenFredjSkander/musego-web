@@ -1,0 +1,80 @@
+{{ include('partials/main.html.twig') }}
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Datatables'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+{{ include('partials/body.html.twig') }}
+
+
+<body>
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Abonnement', title: 'Modifier abonnement'}) }}
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                {{ form(form) }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+            <!-- End Form Layout -->
+
+            <!-- Start Form Sizing -->
+
+            <!-- End Form Sizing -->
+
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    {{ include('partials/footer.html.twig') }}
+</div>
+<!-- end main content-->
+
+
+<!-- End Page-content -->
+
+
+{{ include('partials/footer.html.twig') }}
+<!-- end main content-->
+
+
+<!-- END layout-wrapper -->
+
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+
+</body>

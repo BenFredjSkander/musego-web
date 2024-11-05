@@ -1,0 +1,29 @@
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>AvisSur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for avi in avis %}
+            <tr>
+                <td>{{ avi.id }}</td>
+                <td>{{ avi.type }}</td>
+                <td>{{ avi.description }}</td>
+                <td>{{ avi.avisSur }}</td>
+                <td>
+                    <a href="{{ path('app_front_avis_app_avis_show', {'id': avi.id}) }}">show</a>
+                    <a href="{{ path('app_front_avis_app_avis_edit', {'id': avi.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

@@ -1,0 +1,138 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Musegoo{% endblock %}
+
+{% block body %}
+
+    <div class="boxed-wrapper">
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--Start breadcrumb area-->
+
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg','Ateliers', 'Ateliers') }}
+        <!--End breadcrumb area-->
+
+
+        <!--Start Ateliers Area-->
+        <!--Start About Style3 Area-->
+        <section class="about-style3-area">
+            <div class="container">
+                <div class="row top">
+                    <div class="col-xl-6">
+                        <div class="about-style1-content style3">
+                            <div class="sec-title">
+                                <p>Découvrez</p>
+                                <div class="big-title"><h1>Nos Ateliers</h1></div>
+                            </div>
+                            <div class="inner-content">
+                                <h3>Vous cherchez une occasion de vous amuser tout en apprenant de nouvelles compétences
+                                    ?
+                                    Vous avez envie de vous évader et de découvrir de nouvelles activités passionnantes
+                                    ?
+                                    Alors ne cherchez plus et participez à une de nos formations ludiques ! Cliquez sur
+                                    l'un
+                                    des ateliers proposés</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="about-style1-content right-content style3">
+                            <div class="inner-content">
+                                <div class="text">Que vous soyez intéressé par le théâtre, la peinture, le football, la
+                                    sculpture
+                                    ou tout autre domaine, nous avons la formation qu'il vous faut !
+                                    Nos formations sont conçues pour que vous appreniez en vous amusant. Vous aurez
+                                    l'occasion de rencontrer
+                                    des personnes partageant les mêmes centres d'intérêt que vous, d'échanger des idées
+                                    et de progresser ensemble
+                                    dans votre discipline.
+                                </div>
+                                <div id="moreBtn" class="bottom-box">
+                                    <div class="button">
+                                        <a class="btn-one">En Savoir plus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--End About Style3 Area-->
+        <section class="exhibitions-area exhibitions-page">
+            <div class="container">
+                <div class="row masonary-layout">
+                    <!--Start single exhibition Box-->
+                    {% for a in list %}
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                            <div class="single-exhibition-box style4">
+                                <div class="img-holder">
+                                    <img src="{{ a.image }}" style="object-fit: cover;width: 100%;height: 300px;">
+                                    <div class="overlay-style-one bg1">
+                                        <div class="zoom-button">
+                                            <a class="lightbox-image" data-fancybox="gallery"
+                                               href="{{ a.image }}">
+                                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-holder text-center">
+                                    <div style="text-align: center">
+                                        <div class="button">
+                                            <a class="btn-one"
+                                               href=" {{ path('app_front_formation_byAtelier',{ 'id':a.id }) }}">Atelier
+                                                de {{ a.nom }}</a>
+
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <!--End single exhibition Box-->
+                </div>
+{#                <div class="row">#}
+{#                    <div class="col-xl-12">#}
+{#                        <div class="view-more-button text-center">#}
+{#                            <a class="btn-two" href="#">View More</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </section>
+        <!--End Exhibitions Area-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}
+
+{% block customJS %}
+    <script>
+        const myDiv = document.getElementById("moreBtn");
+        myDiv.addEventListener("click", (event) => {
+            $('html,body').animate({
+                    scrollTop: $(".masonary-layout").offset().top
+                },
+                'slow');
+        })
+    </script>
+{% endblock %}

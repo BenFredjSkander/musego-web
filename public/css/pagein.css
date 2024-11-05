@@ -1,0 +1,18 @@
+.pagination a {
+    font-size: 18px;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    }
+    .pagination a.active {
+        font-size: 18px;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color:#d7bb6c;
+    border-radius:6px;
+    }
+    .pagination a:hover:not(.active) {
+    background-color: #d4d5d2;
+    border-radius:6px;
+    }

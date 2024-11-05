@@ -1,0 +1,42 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block head %}
+    <head>
+
+        {{ include('partials/title-meta.html.twig', {title: 'Request password reset'}) }}
+
+        {{ include('partials/head-css.html.twig') }}
+
+    </head>
+{% endblock %}
+
+{% block bodyContent %}
+    <div class="text-center mt-2">
+        <h5 class="text-primary">Réinitialisez votre mot de passe !</h5>
+        <p class="text-muted">Vérifiez votre boite email</p>
+    </div>
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="p-2 mt-4">
+        <div class="text-center mb-4">
+            <lottie-player src="{{ asset('images/lf20_pqnfmone.json') }}" background="transparent" speed="1"
+                           style="height: 150px; width:100%; display: flex;" loop autoplay></lottie-player>
+            Si un compte correspondant à votre adresse e-mail existe, un e-mail vient d'être envoyé contenant un lien
+            que vous pouvez utiliser
+            pour réinitialiser votre mot de passe.
+            Ce lien expirera
+            in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            <p>Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou <a
+                        href="{{ path('app_forgot_password_request') }}">essayer à nouveau</a>.</p>
+        </div>
+
+
+    </div>
+
+{% endblock %}
+{% block customJS %}
+    <script src="{{ asset('js/lottie-player.min.js') }}"></script>
+
+{% endblock %}

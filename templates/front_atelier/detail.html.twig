@@ -1,0 +1,217 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}{{ formation.nom }}{% endblock %}
+{% block customCSS %}
+    <link href="{{ asset('libs/toastr/build/toastr.min.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    <div class="boxed_wrapper">
+
+        {#        <div class="preloader"></div> #}
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-1.jpg','Formation', 'Détails') }}
+        <!--End breadcrumb area-->
+
+        <!--Start About Style1 Area-->
+        <section class="about-style1-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-10">
+                        <div class="about-style1-left-content clearfix">
+                            <div class="img-box">
+                                <img src="{{ asset('images/resources/hannibal_icon.png') }}" alt="Awesome Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="about-style1-content">
+                            <div class="sec-title">
+                                <div class="big-title"><h1>{{ formation.nom }}</h1></div>
+                            </div>
+                            <div class="inner-content">
+                                <h3> - Période : {{ formation.dateDebut|format_date }}
+                                    - {{ formation.dateFin|format_date }}<br>
+                                    - Niveau : {{ formation.niveau }}<br>
+                                    - Atelier : {{ formation.atelier.nom }}<br>
+                                    - Formateur : {{ formation.idFormateur.username }}<br></h3>
+                                <div class="text">Merci d'avoir choisi l'une de nos formations,
+                                    nous espérons vous revoir très bientôt.
+                                    Veuillez confirmer votre participation ci-dessous.
+                                </div>
+                                {% if formation.idUser.contains(app.user) %}
+                                    <div class="bottom-box">
+                                        <div class="button">
+                                            <a class="btn-one">Vous avez deja participé</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div id="participateBtn" class="bottom-box">
+                                        <div class="button">
+                                            <a class="btn-one" id="contentBtn">Participer</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--End About Style1 Area-->
+        <!--Start Fact Testimonial Area-->
+        <br>
+        <br>
+        <br>
+        <section class="fact-testimonial-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="fact-counter-box">
+                            <div class="fact-counter-bg wow fadeInLeft" data-wow-delay="500ms"
+                                 style="background-image:url({{ asset('images/parallax-background/fact-counter-bg-bg.jpg') }});"></div>
+                            <ul>
+                                <img src="{{ asset('images/resources/hannibla_logo_2.png') }}" alt="Icon" width=2200px
+                                     height='500px'>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="testimonial-box-holder style2">
+                            <div class="sec-title clr-white">
+                                <p>Testimonials</p>
+                                <div class="big-title"><h1>What Clients Say</h1></div>
+                            </div>
+                            <div class="testimonial-box-holder-bg"
+                                 style="background-image:url({{ asset('images/parallax-background/testimonial-box-holder-bg.jpg') }});"></div>
+                            <div class="testimonial-carousel-style2 style3 owl-carousel owl-theme">
+                                <!--Start single testimonial style2-->
+                                <div class="single-testimonial-style2">
+                                    <div class="top">
+                                        <div class="img-box">
+                                            <img src="{{ asset('images/testimonial/tes-v2-1.png') }}"
+                                                 alt="Awesome Image">
+                                        </div>
+                                        <div class="title-box">
+                                            <span>Organization</span>
+                                            <h2>Rachel Azark</h2>
+                                            <div class="review-box">
+                                                <ul>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <p>le musée que je préfère le plus en Tunisie !</p>
+                                    </div>
+                                </div>
+                                <!--End single testimonial style2-->
+                                <!--Start single testimonial style2-->
+                                <div class="single-testimonial-style2">
+                                    <div class="top">
+                                        <div class="img-box">
+                                            <img src="{{ asset('images/testimonial/tes-v2-1.png') }}"
+                                                 alt="Awesome Image">
+                                        </div>
+                                        <div class="title-box">
+                                            <span>Organization</span>
+                                            <h2>Rachel Azark</h2>
+                                            <div class="review-box">
+                                                <ul>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <p>Très bonne formation. Je la recommande à tous</p>
+                                    </div>
+                                </div>
+                                <!--End single testimonial style2-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--Start Fact Testimonial Area-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}
+
+{% block customJS %}
+    <script src="{{ asset('libs/toastr/build/toastr.min.js') }}"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-full-width",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        //Add a click event handler to our button.
+        const myDiv = document.getElementById("participateBtn");
+        myDiv.addEventListener("click", (event) => {
+
+
+            //The URL that we are sending an Ajax request to.
+            //For this example, I'm sending a Ajax request to the current page.
+
+            $.ajax({
+                url: '{{ path('app_front_formation_participer', { 'id':formation.id }) }}',
+                success: function (data) {
+                    //The Ajax request was a success.
+                    $('#contentBtn').text("Vous avez deja participé");
+                    toastr.success('Merci pour votre inscription :), veuillez vérifiez votre boîte mail. ', 'Inscription Confirmée');
+                },
+                complete: function () {
+                    //Ajax request is finished, so we can enable
+                    //the button again.
+                    // $('#ajax_button').attr("disabled", false);
+                }
+            });
+        });
+
+    </script>
+{% endblock %}
+
+

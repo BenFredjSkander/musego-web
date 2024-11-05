@@ -1,0 +1,86 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}A props{% endblock %}
+
+{% block body %}
+    <div class="boxed_wrapper">
+
+        {#        <div class="preloader"></div> #}
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-1.jpg','A propos', 'A propos de nous') }}
+        <!--End breadcrumb area-->
+
+        <!--Start About Style1 Area-->
+        <section class="about-style1-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-10">
+                        <div class="about-style1-left-content clearfix">
+                            <div class="img-box">
+                                <img src="{{ asset('images/resources/about-image-1.png') }}" alt="Awesome Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="about-style1-content">
+                            <div class="sec-title">
+                                <p>A Propos de </p>
+                                <div class="big-title"><h1>TITANS</h1></div>
+                            </div>
+                            <div class="inner-content">
+                                <h3>Notre équipe TITANS est composée de développeurs passionnés dont l'objectif
+                                    principal est d'enseigner l'art et la culture à la population pour les instruire.
+                                    Nous croyons fermement que l'art et la culture sont des éléments essentiels pour le développement intellectuel et émotionnel d'une société.
+
+                                </h3>
+                                <div class="text">En travaillant en étroite collaboration avec des artistes renommés,
+                                    des institutions culturelles et des éducateurs, nous créons des expériences immersives et enrichissantes.
+                                    Nous croyons que l'apprentissage de l'art et de la culture peut stimuler l'imagination, favoriser le dialogue
+                                    interculturel et renforcer le tissu social.
+                                </div>
+                                <div class="bottom-box">
+                                    <div class="button">
+                                        <a class="btn-one" href="#">En savoir Plus</a>
+                                    </div>
+                                    <div class="phone-number">
+                                        <div class="icon"><span class="flaticon-phone-1"></span></div>
+                                        <div class="title">
+                                            <span>Contactez-nous</span>
+                                            <h1><a href="tel:16234569400">70 700 700</a></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--End About Style1 Area-->
+
+
+
+
+
+
+
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+{% endblock %}
+
+

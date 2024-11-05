@@ -1,0 +1,120 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Log in!{% endblock %} #}
+
+{# {% block body %} #}
+{# <form method="post"> #}
+{#    {% if error %} #}
+{#        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
+{#    {% endif %} #}
+
+{#    {% if app.user %} #}
+{#        <div class="mb-3"> #}
+{#            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a> #}
+{#        </div> #}
+{#    {% endif %} #}
+
+{#    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> #}
+{#    <label for="inputEmail">Email</label> #}
+{#    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus> #}
+{#    <label for="inputPassword">Password</label> #}
+{#    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required> #}
+
+{#    <input type="hidden" name="_csrf_token" #}
+{#           value="{{ csrf_token('authenticate') }}" #}
+{#    > #}
+
+{#    #}{# #}
+{#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality. #}
+{#        See https://symfony.com/doc/current/security/remember_me.html #}
+
+{#        <div class="checkbox mb-3"> #}
+{#            <label> #}
+{#                <input type="checkbox" name="_remember_me"> Remember me #}
+{#            </label> #}
+{#        </div> #}
+{#    #}
+
+{#    <button class="btn btn-lg btn-primary" type="submit"> #}
+{#        Sign in #}
+{#    </button> #}
+{# </form> #}
+{# {% endblock %} #}
+
+
+
+
+{% extends 'base_auth.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block head %}
+    <head>
+
+        {{ include('partials/title-meta.html.twig', {title: 'Login'}) }}
+
+        {{ include('partials/head-css.html.twig') }}
+
+    </head>
+{% endblock %}
+
+{% block bodyContent %}
+    <div class="text-center mt-2">
+        <h5 class="text-primary">Re-bonjour</h5>
+        <p class="text-muted">Se connecter pour continuer à MuseGO.</p>
+    </div>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    {% for label, messages in app.flashes %}
+        <div class="container">
+            <div class="alert alert-{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message | raw }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="p-2 mt-4">
+        {{ form_start(form) }}
+        {{ form_row(form.email, {
+            attr:{'value':lastUsername}
+        }) }}
+
+        <div class="float-end">
+            <a href="{{ path('app_forgot_password_request') }}" class="text-muted">Mot de passe oublié?</a>
+        </div>
+        {{ form_row(form.password) }}
+
+        {#                                <div class="form-check"> #}
+        {#                                    <input type="checkbox" class="form-check-input" id="auth-remember-check"> #}
+        {#                                    <label class="form-check-label" for="auth-remember-check">Remember me</label> #}
+        {#                                </div> #}
+
+        {{ form_row(form.login) }}
+
+
+        <div class="mt-4 text-center">
+            <p class="mb-0">Vous n'avez pas de compte ? <a href="{{ path('app_register') }}"
+                                                           class="fw-medium text-primary"> S'inscrire maintenant </a>
+            </p>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" id="fprint" name="fprint"/>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block customJS %}
+    <script src={{ asset('js/bootstrap-show-password.min.js') }}></script>
+    <script type="module">
+        import getFingerprint from '{{ asset('js/b-finger.js') }}';
+
+        {
+            document.getElementById('fprint').value = getFingerprint({debug: false});
+        }
+    </script>
+{% endblock %}

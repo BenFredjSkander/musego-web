@@ -1,0 +1,142 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "cloudinary/cloudinary_php": "^2.10",
+        "cmen/google-charts-bundle": "^5.0",
+        "doctrine/annotations": "^2.0",
+        "doctrine/doctrine-bundle": "^2.8",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.14",
+        "donatj/phpuseragentparser": "^1.7",
+        "dukecity/command-scheduler-bundle": "^5.0",
+        "endroid/qr-code": "^4.8",
+        "endroid/qr-code-bundle": "*",
+        "gesdinet/jwt-refresh-token-bundle": "^1.1",
+        "guzzlehttp/guzzle": "^7.5",
+        "karser/karser-recaptcha3-bundle": "^0.1.23",
+        "knplabs/knp-paginator-bundle": "^5.9",
+        "knplabs/knp-time-bundle": "^1.20",
+        "lexik/jwt-authentication-bundle": "^2.18",
+        "maennchen/zipstream-php": "^2.4",
+        "nelmio/api-doc-bundle": "^4.11",
+        "php-flasher/flasher-notyf-symfony": "^1.13",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpoffice/phpspreadsheet": "^1.17",
+        "phpro/api-problem-bundle": "^1.5",
+        "phpstan/phpdoc-parser": "^1.16",
+        "rollerworks/password-strength-bundle": "^2.2",
+        "sensio/framework-extra-bundle": "^6.1",
+        "sonata-project/seo-bundle": "^2.13",
+        "stripe/stripe-php": "^10.12",
+        "symfony/asset": "5.4.*",
+        "symfony/console": "5.4.*",
+        "symfony/doctrine-messenger": "5.4.*",
+        "symfony/dotenv": "5.4.*",
+        "symfony/expression-language": "5.4.*",
+        "symfony/flex": "^1.17|^2",
+        "symfony/form": "5.4.*",
+        "symfony/framework-bundle": "5.4.*",
+        "symfony/http-client": "5.4.*",
+        "symfony/intl": "5.4.*",
+        "symfony/mailer": "5.4.*",
+        "symfony/mime": "5.4.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/notifier": "5.4.*",
+        "symfony/process": "5.4.*",
+        "symfony/property-access": "5.4.*",
+        "symfony/property-info": "5.4.*",
+        "symfony/proxy-manager-bridge": "5.4.*",
+        "symfony/runtime": "^6.2",
+        "symfony/security-bundle": "5.4.*",
+        "symfony/sendinblue-mailer": "5.4.*",
+        "symfony/serializer": "5.4.*",
+        "symfony/string": "5.4.*",
+        "symfony/translation": "5.4.*",
+        "symfony/twig-bundle": "5.4.*",
+        "symfony/validator": "5.4.*",
+        "symfony/web-link": "5.4.*",
+        "symfony/webapp-meta": "^1.0",
+        "symfony/yaml": "5.4.*",
+        "symfonycasts/reset-password-bundle": "^1.17",
+        "symfonycasts/verify-email-bundle": "^1.13",
+        "tattali/calendar-bundle": "^1.2",
+        "tecnickcom/tcpdf": "^6.6",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/intl-extra": "^3.5",
+        "twig/twig": "^2.12|^3.0",
+        "twilio/sdk": "^7.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true,
+            "endroid/installer": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.12"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": "true",
+            "require": "5.4.*"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "rector/rector": "^0.15.21",
+        "symfony/browser-kit": "5.4.*",
+        "symfony/css-selector": "5.4.*",
+        "symfony/debug-bundle": "5.4.*",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^6.2",
+        "symfony/stopwatch": "5.4.*",
+        "symfony/web-profiler-bundle": "5.4.*"
+    }
+}

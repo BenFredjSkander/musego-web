@@ -1,0 +1,86 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}new avis{% endblock %}
+
+
+{% block body %}
+<div class="boxed-wrapper">
+        <div class="boxed-wrapper">
+        <div class="preloader"></div>
+
+            <!--Start main header Style4-->
+            {% include 'front-header.html.twig' %}
+            <!--Start breadcrumb area-->
+            {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg', 'Avis', 'Avis') }}
+            <!--End breadcrumb area-->
+            <h1>Create new Avis</h1>
+
+            {{ include('avis/_form.html.twig') }}
+
+            <a href="{{ path('app_front_avis_app_avis_index') }}">back to list</a>
+
+            <!--Start subscribe Area-->
+            <section class="subscribe-area style3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <div class="welcome-content">
+                                <div class="sec-title">
+                                    <p>Welcome To the Museum Histories</p>
+                                    <div class="big-title"><h1>Sign up for Updates on<br> Exhibitions, Artists and
+                                            Events.
+                                    </h1></div>
+                            </div>
+                            <div class="subscribe-box">
+                                <form class="subscribe-form" action="#">
+                                    <input type="email" name="email" placeholder="Your Email Address">
+                                    <button type="submit">Subscribe</button>
+                                </form>
+                            </div>
+                            <form action="#">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" name="vehicle1" value="1">
+                                        <span>Exhibitions and events</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="vehicle2" value="1">
+                                        <span>Limited edition prints and exclusive releases</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="vehicle2" value="1">
+                                        <span>Building a collection</span>
+                                    </li>
+                                </ul>
+                            </form>
+                            <div class="text">
+                                We will process the personal data you have supplied in accordance with our <a href="#">privacy
+                                    policy.</a> You can unsubscribe or change your preferences at any time by clicking
+                                the link in any emails.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="welcome-image-box" data-aos="fade-left" data-aos-easing="linear"
+                             data-aos-duration="1500">
+                            <img src="images/resources/welcome-image.png" alt="Awesome Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End subscribe Area-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+{% endblock %}

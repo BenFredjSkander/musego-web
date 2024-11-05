@@ -1,0 +1,66 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Offres{% endblock %}
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-4.jpg', 'Mon profile', 'Profil') }}
+        <!--End breadcrumb area-->
+
+        <!--Start Buy Tickets Area-->
+        <section class="buy-tickets-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="buy-tickets-content">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="sec-title">
+                                        <div class="big-title"><h1>Modifier mon profile</h1></div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {{ form(form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Buy Tickets Area-->
+
+
+        <!--Start Partner Area Style3-->
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+{% endblock %}
+
+{% block customJS %}
+    <script>
+        const myDiv = document.getElementById("moreBtn");
+        myDiv.addEventListener("click", (event) => {
+            $('html,body').animate({
+                    scrollTop: $(".tabs-box").offset().top
+                },
+                'slow');
+        })
+    </script>
+{% endblock %}

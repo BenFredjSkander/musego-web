@@ -1,0 +1,262 @@
+{{ include('partials/main.html.twig') }}
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'User List'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Utilisateurs', title: 'Liste des utilisateurs'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        {#                                        <div class="mb-3"> #}
+                                        {#                                            <a href="javascript:void(0);" #}
+                                        {#                                               class="btn btn-success waves-effect waves-light"><i #}
+                                        {#                                                        class="mdi mdi-plus me-2"></i> Add New</a> #}
+                                        {#                                        </div> #}
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control rounded bg-light border-0"
+                                                           id="searchField"
+                                                           placeholder="Recherche...">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-centered table-nowrap mb-0" id="usertable">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Date creation</th>
+                                            <th scope="col">Dernière activité</th>
+                                            <th scope="col">Role</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col" style="width: 200px;">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="all">
+                                        {% for user in pagination %}
+                                            <tr>
+                                                <td>{% if user.profilePic is null %}
+                                                        <div class="avatar-xs d-inline-block me-2">
+                                                            <div class="avatar-title bg-soft-primary rounded-circle text-primary">
+                                                                <i class="mdi mdi-account-circle m-0"></i>
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        <img src="{{ asset('/images/users/avatar-2.jpg') }}" alt=""
+                                                             class="avatar-xs rounded-circle me-2">
+                                                    {% endif %}
+                                                    <a href="{{ path('app_back_users_profile', {'id':user.id}) }}"
+                                                       class="text-body">{{ user.username }}</a>
+                                                </td>
+                                                <td>{{ user.createdDate|date }}</td>
+                                                <td>{% if user.isActiveNow() %}
+                                                        Actif
+                                                    {% else %}
+                                                        {{ user.lastActiveAt|ago }}
+                                                    {% endif %}</td>
+                                                <td>
+                                                    {% if 'ROLE_ADMIN' in user.getRoles() %}
+                                                        <span class="badge bg-info">Admin</span>
+                                                    {% elseif 'ROLE_FORMATEUR' in user.getRoles() %}
+                                                        <span class="badge bg-warning">Formateur</span>
+                                                    {% else %}
+                                                        <span class="badge bg-dark">Utilisateur</span>
+                                                    {% endif %}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item">
+                                                            <a href="{{ path('app_back_users_edit', {'id': user.id}) }}"
+                                                               class="px-2 text-primary"><i
+                                                                        class="uil uil-pen font-size-18"></i></a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            {% if user.locked %}
+                                                                <a href="{{ path('app_back_users_ban', {'id':user.id}) }}"
+                                                                   class="px-2 text-success"><i
+                                                                            class="uil uil-user-check font-size-18"></i>
+                                                                </a>
+                                                            {% else %}
+                                                                <a href="{{ path('app_back_users_ban', {'id':user.id}) }}"
+                                                                   class="px-2 text-danger"><i
+                                                                            class="uil uil-user-exclamation font-size-18"></i></a>
+                                                            {% endif %}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tbody id="searchtab">
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title" id="exampleModalLabel">Demo</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Body modal
+                                                <input type="text" name="id" class="modal-body input"/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+                                        <div>
+                                            <p class="mb-sm-0">{{ "Showing 1 to 10 of " ~ pagination.getTotalItemCount ~ " entries" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="float-sm-end">
+                                            <ul class="pagination mb-sm-0">
+                                                {{ knp_pagination_render(pagination) }}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#searchField").keyup(function (e) {
+            /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+            var value = $(this).val();
+            /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+            $.ajax({
+                /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                url: "{{ path('app_back_users_ajax_search') }}",
+                /* La méthode utilisée pour transférer les données est GET */
+                type: 'GET',
+                /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                data: {
+                    'query': value
+                },
+                /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                success: function (retour) {
+                    if (retour.length) {
+                        console.log(JSON.stringify(retour))
+                        $("#searchtab").empty();
+                        $.each(JSON.parse(retour), function (i, obj) {
+                            console.log(obj.roles);
+                            var active;
+                            if (obj.activeNow) {
+                                active = 'Actif';
+                            } else if (obj.lastActiveAt) {
+                                var format = moment(obj.lastActiveAt).format('MMMM Do YYYY, h:mm:ss');
+                                active = moment(format, 'MMMM Do YYYY, h:mm:ss').fromNow()
+                            }
+                            var role;
+                            if (obj.roles.includes('ROLE_ADMIN')) {
+                                role = '<span class="badge bg-info">Admin</span>';
+                            } else if (obj.roles.includes('ROLE_FORMATEUR')) {
+                                role = '<span class="badge bg-warning">Formateur</span>';
+                            } else {
+                                role = '<span class="badge bg-dark">Utilisateur</span>';
+                            }
+
+                            $("#all").hide();
+                            $("#searchtab").append('<tr><td> ' + obj.username + '  </td><td>    ' + moment(obj.createdDate).format('MMMM Do YYYY, h:mm:ss') + '  </td><td>' + active + ' </td><td>' + role + '</td><td>' + obj.email + '</td><td><a href="/back/users/edit/' + obj.id + '" class="px-2 text-primary"><i class="uil uil-pen font-size-18"></i></a></tr>');
+                        });
+                    } else {
+                        $("#all").show();
+                        $("#searchtab").empty();
+                        $("#searchtab").fadeIn('fast');
+                    }
+                },
+            });
+            return false;
+        });
+    });
+
+</script>
+<script>
+    function opeBanModal(banned, path,) {
+
+    }
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var id = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('The ID is: ' + id)
+        modal.find('.modal-body input').val(id)
+    })
+</script>
+
+
+</body>
+</html>

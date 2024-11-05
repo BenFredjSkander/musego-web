@@ -1,0 +1,182 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Les categories{% endblock %}
+
+{% block body %}
+
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg', 'Galerie', 'Galerie') }}
+        <!--End breadcrumb area-->
+
+        <!--Start Galerie Area-->
+        <section class="gallery-area">
+            <div class="container">
+                <div class="sortable-masonry">
+                    <!--Filter-->
+                    {#                    <div class="filters text-center clearfix"> #}
+                    {#                        <ul class="filter-tabs filter-btns clearfix"> #}
+                    {#                            <li class="active filter" data-role="button" data-filter=".all">Show All</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".objects">Objects</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".art">Art</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".pic">Pictures</li> #}
+                    {#                            <li class="filter" data-role="button" data-filter=".insta">Installation</li> #}
+                    {#                        </ul> #}
+                    {#                    </div> #}
+                    <div class="row items-container clearfix">
+                        <!--Start Single Art Box Style2-->
+
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all objects insta">
+                            {% for categorie in app.request.get('categories') %}
+                                <div class="single-art-box-style2 marbtm50">
+                                    <div class="img-holder">
+                                        <img src="{{ categorie.getImage() }}" alt="{{ categorie.getNom() }}">
+                                        <div class="overlay-content">
+                                            <div class="zoom-button">
+                                                <a class="lightbox-image" data-fancybox="gallery"
+                                                   href="{{ categorie.getImage() }}">
+                                                    <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                                    {{ categorie.description }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-holder">
+                                        <h3><a href="#">{{ categorie.getNom() }}</a></h3>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% for categorie in categories %}
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 masonry-item all objects insta">
+                                <div class="single-art-box-style2 marbtm50">
+                                    <div class="img-holder"
+                                         onclick="window.location.href = '{{ path('app_front_oeuvre_categorie', {'id':categorie.id}) }}';"
+                                    >
+                                        <img src="{{ categorie.image }}" alt="{{ categorie.nom }}"
+                                             style="object-fit: cover;width: 100%;height: 300px;">
+                                        <div class="overlay-content">
+                                            <div class="zoom-button">
+                                                <a class="lightbox-image" data-fancybox="gallery"
+                                                   href="{{ categorie.image }}">
+
+                                                    <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-holder">
+                                        <h3><a href="#">{{ categorie.nom }}</a></h3>
+
+
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">{{ categorie.nom }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="text-holder">
+                                                        <h3><a href="#">{{ categorie.nom }}</a></h3>
+                                                        <span>{{ categorie.getDescription }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Fermer
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Gallery Area-->
+
+        <!--Start subscribe Area-->
+        <section class="subscribe-area style3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="welcome-content">
+                            <div class="sec-title">
+                                <p>Welcome To the Museum Histories</p>
+                                <div class="big-title"><h1>Sign up for Updates on<br> Exhibitions, Artists and Events.
+                                    </h1></div>
+                            </div>
+                            <div class="subscribe-box">
+                                <form class="subscribe-form" action="#">
+                                    <input type="email" name="email" placeholder="Your Email Address">
+                                    <button type="submit">Subscribe</button>
+                                </form>
+                            </div>
+                            <form action="#">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" name="vehicle1" value="1">
+                                        <span>Exhibitions and events</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="vehicle2" value="1">
+                                        <span>Limited edition prints and exclusive releases</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="vehicle2" value="1">
+                                        <span>Building a collection</span>
+                                    </li>
+                                </ul>
+                            </form>
+                            <div class="text">
+                                We will process the personal data you have supplied in accordance with our <a href="#">privacy
+                                    policy.</a> You can unsubscribe or change your preferences at any time by clicking
+                                the link in any emails.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="welcome-image-box" data-aos="fade-left" data-aos-easing="linear"
+                             data-aos-duration="1500">
+                            {#                            <img src="images/resources/welcome-image.png" alt="Awesome Image"> #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End subscribe Area-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}

@@ -1,0 +1,229 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-4.jpg','Contact', 'Contact') }}
+        <!--End breadcrumb area-->
+
+        <!--Start Contact Form Section-->
+        <section class="contact-form-area">
+            <div class="auto-container">
+                <div class="sec-title text-center">
+                    <div class="big-title"><h1>Get in Touch</h1></div>
+                    <p>Feel free to get in touch with me. we alwasy open to discussing now projects, createive ideas<br>
+                        or opportunities to be part of your visions</p>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <div class="contact-form">
+                            <div class="inner-box">
+                                <form id="contact-form" name="contact_form" class="default-form2"
+                                      action="http://mehedi.asiandevelopers.com/demo/museum/inc/sendmail.php"
+                                      method="post">
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="input-box">
+                                                <input type="text" name="form_name" value="" placeholder="Name"
+                                                       required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="input-box">
+                                                <input type="email" name="form_email" value="" placeholder="Email"
+                                                       required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="input-box">
+                                                <input type="text" name="form_subject" value="" placeholder="Subject">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="input-box">
+                                                <input type="text" name="form_phone" value="" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="input-box">
+                                                <textarea name="form_message" placeholder="Your Message..."
+                                                          required=""></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="button-box text-center">
+                                                <input id="form_botcheck" name="form_botcheck" class="form-control"
+                                                       type="hidden" value="">
+                                                <button type="submit" data-loading-text="Please wait...">Send Message
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--End Contact Form Section-->
+
+
+        <section class="google-map-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="contactpage-company-info-box">
+                            <div class="footer-logo">
+                                <a href="index.html"><img src="images/resources/logo.png" alt="Footer Logo"></a>
+                            </div>
+                            <div class="text">
+                                <p>In order to support the artisan facilities and the local inheritance in a whole, the
+                                    Museum Histories takes pride in representing the Artist Blanket – the final
+                                    consequence of the early cooperation of the gallery artists.</p>
+                                <ul>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="flaticon-clock-1"></span>
+                                        </div>
+                                        <div class="title">
+                                            <h5>Daily 9.30 am–6.00 pm<br> Thursday and Holidays: Closed</h5>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="flaticon-phone"></span>
+                                        </div>
+                                        <div class="title">
+                                            <h3><a href="tel:16234569400">1 (623) 456-9400</a></h3>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="flaticon-global"></span>
+                                        </div>
+                                        <div class="title">
+                                            <h5>
+                                                <a href="https://www.museumhistories.com/">www.museumhistories.com</a><br>
+                                                <a href="mailto:info@templatepath.com">museumhistories@hotmail.com</a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="social-links">
+                                    <div class="title-follow">Follow Us :-</div>
+                                    <ul class="social-links-style1">
+                                        <li>
+                                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7">
+                        <div class="map-outer">
+                            <!--Map Canvas-->
+                            <div class="map-canvas"
+                                 data-zoom="12"
+                                 data-lat="-37.817085"
+                                 data-lng="144.955631"
+                                 data-type="roadmap"
+                                 data-hue="#ffc400"
+                                 data-title="Envato"
+                                 data-icon-path="images/resources/map-marker.png"
+                                 data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>">
+                            </div>
+                            <div class="address-box">
+                                <h3>Address :-</h3>
+                                <p>2270 S Real Camino<br> Lake California, US 90967</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--Start Partner Area Style3-->
+        <section class="partner-style3-area fix">
+            <div class="layer-outer"></div>
+            <div class="container">
+                <div class="sec-title text-center">
+                    <p>PART OF THE MUSEUM</p>
+                    <div class="big-title"><h1>Our Partners & Sponsers</h1></div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="partner-box">
+                            <!--Start Single Partner Logo Box-->
+                            <div class="single-partner-logo-box">
+                                <a href="#"><img src="images/brand/1.png" alt="Awesome Image"></a>
+                            </div>
+                            <!--End Single Partner Logo Box-->
+                            <!--Start Single Partner Logo Box-->
+                            <div class="single-partner-logo-box">
+                                <a href="#"><img src="images/brand/2.png" alt="Awesome Image"></a>
+                            </div>
+                            <!--End Single Partner Logo Box-->
+                            <!--Start Single Partner Logo Box-->
+                            <div class="single-partner-logo-box">
+                                <a href="#"><img src="images/brand/3.png" alt="Awesome Image"></a>
+                            </div>
+                            <!--End Single Partner Logo Box-->
+                            <!--Start Single Partner Logo Box-->
+                            <div class="single-partner-logo-box">
+                                <a href="#"><img src="images/brand/4.png" alt="Awesome Image"></a>
+                            </div>
+                            <!--End Single Partner Logo Box-->
+                            <!--Start Single Partner Logo Box-->
+                            <div class="single-partner-logo-box">
+                                <a href="#"><img src="images/brand/5.png" alt="Awesome Image"></a>
+                            </div>
+                            <!--End Single Partner Logo Box-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+{% endblock %}

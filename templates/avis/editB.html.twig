@@ -1,0 +1,27 @@
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block head %}
+
+
+    {{ include('partials/title-meta.html.twig', {title: 'User List'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+
+
+{{ include('partials/body.html.twig') }}
+{{ include('partials/menu.html.twig') }}
+{% endblock %}
+{% block title %}edit avis{% endblock %}
+
+
+
+{% block body %}
+    <h1>Edit Avis</h1>
+
+    {{ include('avis/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_back_avis_index') }}">back to list</a>
+
+    {{ include('avis/_delete_form.html.twig') }}
+{% endblock %}

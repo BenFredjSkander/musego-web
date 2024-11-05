@@ -1,0 +1,108 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+{# TODO remplacer le title par titre de l'evenement #}
+{% block title %}MuseGo{% endblock %}
+
+{% block body %}
+
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-3.jpg', 'Evenement', 'Details') }}
+        <!--End breadcrumb area-->
+
+
+        <!--Start Events Single Area-->
+        <section class="events-single-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="events-single-image-box">
+                            <img src="{{ evenement.poster }}" alt="Awesome Image">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="events-single-text-box">
+                            <h2>{{ evenement.nom }}<br></h2>
+
+                            <p>{{ evenement.description }} </p>
+
+
+                            <br>
+                            <br>
+
+
+                            {% if (evenement.conatinsIdUser(app.user)) %}
+
+                                <a class="btn btn-danger btn-rounded waves-effect waves-light"
+                                   href="{{ path('app_front_evenements_participer', {'id': evenement.id}) }}"
+                                   style="font-size: 30px; height: 50px; width: 400px; margin-left: 250px; text-align: center"
+                                   ;>
+                                    annuler participation </a>
+
+
+                            {% else %}
+
+
+                                <a class="btn-two"
+                                   href="{{ path('app_front_evenements_participer', {'id': evenement.id}) }}"
+                                   style="font-size: 30px; height: 50px; width: 400px; margin-left: 250px; text-align: center; "
+                                   ;>
+                                    participer </a>
+
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="events-single-info-box">
+                            <ul class="events-info">
+                                <li>
+                                    <p>Type :</p>
+                                    <span>{{ evenement.type }}</span>
+                                </li>
+                                <li>
+                                    <p>Date:</p>
+                                    <span>{{ evenement.dateDebut |date  ("d/m/Y") }} - {{ evenement.dateFin |date("d/m/Y") }}</span>
+
+                                </li>
+                                <li>
+                                    <p>Lieu :</p>
+                                    <span> {{ evenement.lieu }}</span>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+        <!--End Events Single Area-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}

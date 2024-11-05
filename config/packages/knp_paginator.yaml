@@ -1,0 +1,4 @@
+knp_paginator:
+  page_range: 5                      # default page range used in pagination control          # default number of items per page
+  template:
+    pagination: '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig'     # sliding pagination controls template

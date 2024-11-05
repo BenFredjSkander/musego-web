@@ -1,0 +1,42 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}MuseGo{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="boxed-wrapper">
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg', 'Avis', 'Avis') }}
+        <!--End breadcrumb area-->
+
+
+        {% include "avis/_searchData.html.twig" with {form:form} only %}
+        <!-- ShareThis BEGIN -->
+
+
+        <a href="{{ path('app_front_avis_app_qr_codes') }}" class="btn btn-secondary">QrCode</a>
+
+
+        <a href="{{ path('app_front_avis_app_avis_new') }}">Create new</a>
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+{% endblock %}

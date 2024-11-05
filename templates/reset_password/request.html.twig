@@ -1,0 +1,58 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Reset your password{% endblock %} #}
+
+{# {% block body %} #}
+{#    {% for flash_error in app.flashes('reset_password_error') %} #}
+{#        <div class="alert alert-danger" role="alert">{{ flash_error }}</div> #}
+{#    {% endfor %} #}
+{#    <h1>Reset your password</h1> #}
+
+{#    {{ form_start(requestForm) }} #}
+{#        {{ form_row(requestForm.email) }} #}
+{#        <div> #}
+{#            <small> #}
+{#                Enter your email address and we will send you a #}
+{#                link to reset your password. #}
+{#            </small> #}
+{#        </div> #}
+
+{#        <button class="btn btn-primary">Send password reset email</button> #}
+{#    {{ form_end(requestForm) }} #}
+{# {% endblock %} #}
+
+{% extends 'base_auth.html.twig' %}
+{% form_theme requestForm 'bootstrap_5_layout.html.twig' %}
+
+{% block head %}
+    <head>
+
+        {{ include('partials/title-meta.html.twig', {title: 'Request password reset'}) }}
+
+        {{ include('partials/head-css.html.twig') }}
+
+    </head>
+{% endblock %}
+
+{% block bodyContent %}
+    <div class="text-center mt-2">
+        <h5 class="text-primary">Réinitialisez votre mot de passe !</h5>
+        <p class="text-muted">Se connecter pour continuer a MuseGO</p>
+    </div>
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="p-2 mt-4">
+        <div class="text-center mb-4" role="alert">
+            Entrez votre e-mail et des instructions vous seront envoyées !
+        </div>
+        {{ form(requestForm) }}
+
+        <div class="mt-4 text-center">
+            <p class="mb-0 ">Vous vous souvenez ? <a href="{{ path('app_login') }}"
+                                                     class="fw-medium text-primary"> Se connecter </a></p>
+        </div>
+    </div>
+
+{% endblock %}

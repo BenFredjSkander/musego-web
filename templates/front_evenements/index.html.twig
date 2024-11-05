@@ -1,0 +1,155 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}MuseGo{% endblock %}
+{% block body %}
+    <div class="boxed-wrapper">
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--Start breadcrumb area-->
+        {{ breadcrumb.input('images/breadcrumb/breadcrumb-2.jpg', 'Evenements', 'Evenements') }}
+        <!--End breadcrumb area-->
+
+
+        <!--Start Evenements Style3 Area-->
+        <section class="events-style3-area pdbottom0">
+
+            {% for evenement in evenements %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <!--Start Single event Box Style3-->
+                            <div class="single-event-box-style3">
+                                <div class="row">
+                                    <div class="col-xl-5">
+
+
+                                        <div class="title-holder">
+                                            <span></span>
+                                            <h2>
+                                                <a href="{{ path ('app_front_evenements_details',{'id':evenement.id}) }}">{{ evenement.nom }}</a>
+                                            </h2>
+                                            <h6><a href="https://www.google.com/search?q={{ evenement.nom }}"
+                                                   target="_blank">voir sur web </a></h6>
+                                            <p>{{ evenement.lieu }} </p>
+
+
+                                            <div class="button">
+
+
+                                                {% if not app.user %}
+                                                    <div class="alert alert-danger">
+                                                        Oups ! Vous n'êtes pas abonné.
+                                                        <br>
+                                                        Vous ne pouvez pas voir les détails
+                                                    </div>
+
+                                                {% else %}
+                                                    <a class="btn-two"
+                                                       href="{{ path('app_front_evenements_details', {'id': evenement.id}) }}">voir
+                                                        détails</a>
+
+
+                                                {% endif %}
+
+
+                                                <a class="btn-two"
+                                                   href="{{ path ('app_front_evenements_qr',{'id':evenement.id}) }}">Scanner</a>
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-5">
+                                        <div class="img-holder">
+                                            <div class="inner">
+                                                <img src="{{ evenement.poster }}" alt="Awesome Image">
+                                                <div class="overlay-style-one bg1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-2">
+                                        <div class="date-holder">
+                                            <div class="inner">
+                                                <h1>{{ evenement.dateDebut|date ("d/m/Y") }}
+                                                    - {{ evenement.dateFin|date ("d/m/Y") }}</h1>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!--End Single event Box Style3-->
+
+
+                            <!--Start Single event Box Style3-->
+
+
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </section>
+        <!--End Events Style3 Area-->
+
+
+
+
+
+        <!--Start Partner Area Style3-->
+        <section class="partner-style3-area fix">
+            <div class="layer-outer"></div>
+            <div class="container">
+                <div class="sec-title text-center">
+                    <p>MUSEGO</p>
+                    <div class="big-title"><h1>Nos partenaires & Sponsors</h1></div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="partner-box">
+                            <div class="d-flex flex-row">
+                                {% for sponsor in sponsors %}
+                                    <div class="single-partner-logo-box">
+                                        <img src="{{ sponsor.photo }}" style="width: 800px; height: 150px;">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+
+
+
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="icon-angle"></span>
+    </button>
+
+
+
+{% endblock %}

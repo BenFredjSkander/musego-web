@@ -1,0 +1,118 @@
+{{ include('partials/main.html.twig') }}
+{% trans_default_domain 'DukecityCommandScheduler' %}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Tache'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Newsletter', title: 'Email planifié'}) }}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+
+                {# Errors flash messages #}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="card-title">{{ 'list.title'|trans }}</h4>
+                                {{ form_start(scheduledCommandForm) }}
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header text-white bg-secondary">
+                                                Command
+                                            </div>
+                                            <div class="card-body">
+                                                {{ form_row( scheduledCommandForm.name, {'attr': {'placeholder': 'name'} } ) }}
+
+                                                {{ form_row( scheduledCommandForm.logFile, {'attr': {'placeholder': 'myFile.log'} } ) }}
+                                                {{ form_row( scheduledCommandForm.priority ) }}
+                                                <div>
+                                                    {{ form_row(scheduledCommandForm.executeImmediately, {label_attr: {class: 'checkbox-custom'} }) }}
+                                                </div>
+                                                <div>
+                                                    {{ form_row(scheduledCommandForm.disabled, {label_attr: {class: 'checkbox-custom'} }) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header text-white bg-secondary">
+                                                Command
+                                            </div>
+                                            <div class="card-body">
+                                                {# Form's fields #}
+                                                {{ form_row( scheduledCommandForm.command, {'attr': {'class': 'form-control select2'} } ) }}
+                                                {{ form_row( scheduledCommandForm.arguments, {'attr': {'placeholder': '--argument1=foo --bar'} } ) }}
+                                                {{ form_row( scheduledCommandForm.cronExpression, {'attr': {'placeholder': '*/10 * * * *'} } ) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Form's actions #}
+                                <div class="text-end gap-3 mt-3">
+                                    <button type="reset" class="btn btn-outline-danger waves-effect waves-light w-md">
+                                        Reset
+                                    </button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light w-md">Submit
+                                    </button>
+                                </div>
+                                {{ form_end(scheduledCommandForm) }}
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>

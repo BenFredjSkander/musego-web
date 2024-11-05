@@ -1,0 +1,95 @@
+{{ include('partials/main.html.twig') }}
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'User List'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Contacts', title: 'User List'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <a href="javascript:void(0);"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="mdi mdi-plus me-2"></i> Add New</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control rounded bg-light border-0"
+                                                           placeholder="Search...">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reponse.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reponse.description }}</td>
+            </tr>
+            <tr>
+                <th>AvisId</th>
+                <td>{{ reponse.avisId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reponse_index') }}">back to list</a>
+
+    <a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">edit</a>
+
+    {{ include('reponse/_delete_form.html.twig') }}
+
+{{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+
+</body>
+</html>

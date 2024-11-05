@@ -1,0 +1,96 @@
+{% extends 'basefront.html.twig' %}
+{% import "front-breadcrumb.html.twig" as breadcrumb %}
+
+{% block title %}Offres{% endblock %}
+{% block body %}
+    <div class="boxed_wrapper">
+
+        <div class="preloader"></div>
+
+        <!--Start main header Style4-->
+        {% include 'front-header.html.twig' %}
+        <!--End main header Style4-->
+
+        {{ breadcrumb.input('images/rami/hny_header_rami.jpg', 'Succés', 'Offres') }}
+
+        <section class="contact-us-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="left-content">
+                            <p>Abonnement effectué avec succés!</p>
+                        </div>
+                        <div class="right-content">
+                            <ul>
+                                <li>
+                                    <h3>Appelez-nous:-</h3>
+                                    <p><a href="tel:16234569400">1 (623) 456-9400</a></p>
+                                </li>
+                                <li>
+                                    <h3>Nos services:-</h3>
+                                    <p>Consulter des oeuvres magnifiques et leurs artistes.</p>
+                                    <p>Participer à des ateliers et des évennements exclusives.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Contact Us Area-->
+
+        <!--Start About Style3 Area-->
+        <section class="about-style3-area">
+            <div class="container">
+                <div class="row top">
+                    <div class="col-xl-6">
+                        <div class="about-style1-content style3">
+                            <div class="sec-title">
+                                <p>Nous souhaitons dire</p>
+                                <div class="big-title"><h1>Merci pour votre ordre d'abonnement!</h1></div>
+                            </div>
+                            <div class="inner-content">
+                                <h3>Fondé en 2022 comme une équipe à but pédagogique.
+                                    Muségo est dédié pour présenter des oeuvres magnifiques réalisés
+                                    par des artistes qui souhaitent exposer leur identité au monde numérique à travers leur art fascinant</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="about-style1-content right-content style3">
+                            <div class="inner-content">
+                                <div class="text">Parmi nos services, Consultation des oeuvres distinctes et leurs artistes.
+                                    Participation à des ateliers et des évennements exclusives. Nous acceuillons des visteurs actifs chaque mois
+                                    avec notre collection unique des oeuvres et ateliers réalisé par des experts!.
+                                </div>
+                                <div class="bottom-box">
+                                    <div class="button">
+                                        <a class="btn-one" href="{{ path ('app_front_abonnement_pdf',{'id':abonnement.id}) }}">Télécharger la facture</a>
+                                    </div>
+                                    <br>
+                                    <div class="phone-number">
+                                        <div class="icon"><span class="flaticon-phone-1"></span></div>
+                                        <div class="title">
+                                            <span>Contactez nous:</span>
+                                            <h1><a href="mailto:orders@example.com">contact@musego.com</a></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!--Start Partner Area Style3-->
+        <!--End Partner Area Style3-->
+
+        <!--Start footer Style2 area-->
+        {% include 'front-footer.html.twig' %}
+        <!--End footer Style2 area-->
+
+
+    </div>
+{% endblock %}

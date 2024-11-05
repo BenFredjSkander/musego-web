@@ -1,0 +1,33 @@
+{% extends 'base_auth.html.twig' %}
+{% form_theme resetForm 'bootstrap_5_layout.html.twig' %}
+
+{% block head %}
+    <head>
+
+        {{ include('partials/title-meta.html.twig', {title: 'Request password reset'}) }}
+
+        {{ include('partials/head-css.html.twig') }}
+
+    </head>
+{% endblock %}
+
+{% block bodyContent %}
+    <div class="text-center mt-2">
+        <h5 class="text-primary">Réinitialisez votre mot de passe !</h5>
+        <p class="text-muted">Se connecter pour continuer a MuseGO</p>
+    </div>
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="p-2 mt-4">
+        {{ form(resetForm) }}
+
+
+    </div>
+
+{% endblock %}
+{% block customJS %}
+    <script src={{ asset('js/bootstrap-show-password.min.js') }}></script>
+
+{% endblock %}

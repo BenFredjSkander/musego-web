@@ -1,0 +1,215 @@
+{{ include('partials/main.html.twig') }}
+{% trans_default_domain 'DukecityCommandScheduler' %}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'User List'}) }}
+
+    <link href="{{ asset('/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+          type="text/css"/>
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"
+          type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Newsletter', title: 'Emails planifiés'}) }}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+
+                {# Errors flash messages #}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <a href="{{ path('app_back_newsletter_command_scheduler_details_new') }}"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="mdi mdi-plus me-2"></i> Add New</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered dt-responsive table-hover nowrap" id="datatable">
+                                        <thead>
+                                        <tr>
+                                            <th data-searchable="false" data-orderable="false">&nbsp;</th>
+                                            <th data-searchable="true"
+                                                data-orderable="true">{{ "detail.name"|trans }}</th>
+                                            <th data-searchable="true"
+                                                data-orderable="true">{{ "detail.command"|trans }}</th>
+                                            <th data-searchable="false"
+                                                data-orderable="false">{{ "detail.cronExpression"|trans }}</th>
+                                            <th data-searchable="true"
+                                                data-orderable="false">{{ "detail.logFile"|trans }}</th>
+                                            <th data-searchable="false"
+                                                data-orderable="true">{{ "detail.lastExecution"|trans }}</th>
+                                            <th data-searchable="false"
+                                                data-orderable="true">{{ "detail.nextRun"|trans }}</th>
+                                            <th data-searchable="false" data-orderable="true"
+                                                class="text-right">{{ "detail.priority"|trans }}</th>
+                                            <th data-searchable="false" data-orderable="false"
+                                                class="text-right">{{ "detail.actions"|trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for command in scheduledCommands %}
+                                            <tr {% if command.disabled == true %}class="text-muted" {% endif %}>
+                                                <td {% if command.disabled == false %}data-search="active"
+                                                    data-order="0" {% else %}data-search="deactive"
+                                                    data-order="1"{% endif %}>
+                                                    <a href="{{ path('app_back_newsletter_command_scheduler_action_toggle', {'id': command.id}) }}"
+                                                       data-toggle="confirmation"
+                                                       data-btn-ok-label="{{ "action.unlock"|trans }}"
+                                                       data-title="{{ "confirm.unlock"|trans }}">
+                                                        {% if command.disabled == true %}
+                                                            <i class="uil uil-power text-danger font-size-20"
+                                                               title="Activate command"></i>
+                                                        {% else %}
+                                                            <i class="uil uil-power text-success font-size-20"
+                                                               title="Deativate command"></i>
+                                                        {% endif %}
+                                                    </a>
+                                                </td>
+                                                <td data-search="{{ command.name }}" data-order="{{ command.name }}">
+                    <span style="font-size:14px;" {% if command.disabled == false %}
+                            class="badge bg-success" title="Command is active"
+                            {% else %}
+                                class="badge bg-danger" title="Command is disabled"
+                            {% endif %}>
+                    {{ command.name }}
+                    </span>
+                                                </td>
+                                                <td>
+                                                    {{ command.command }} {{ command.arguments }}
+                                                </td>
+                                                <td>
+                                                    {{ command.cronExpression }}
+                                                </td>
+                                                <td>
+                                                    {{ command.logFile }}
+                                                </td>
+                                                <td>
+                    <span style="font-size:14px;"
+                          class="badge bg-{% if command.lastReturnCode == 0 %}success{% else %}danger{% endif %}"
+                          title="Last Return Code: {{ command.lastReturnCode }}">
+                    {{ command.lastExecution is empty ? "" : command.lastExecution|date( "dateFormat"|trans ) }}
+                    </span>
+                                                </td>
+                                                <td>
+                                                    {% set nextRunDate = command.getNextRunDate() %}
+                                                    {% if nextRunDate is not null %}
+                                                        {{ nextRunDate|date( "dateFormat"|trans ) }}
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{ command.priority }}
+                                                </td>
+                                                <td style="min-width: 90px;" class="action-container text-right">
+                                                    {% if command.locked == true %}
+                                                        <a href="{{ path('app_back_newsletter_command_scheduler_action_unlock', {'id': command.id}) }}"
+                                                           data-toggle="confirmation"
+                                                           data-btn-ok-label="{{ "action.unlock"|trans }}"
+                                                           data-title="{{ "confirm.unlock"|trans }}">
+                                                            <i class="bi bi-lock-fill text-danger"
+                                                               title="{{ "action.unlock"|trans }}"></i>
+                                                        </a>
+                                                    {% else %}
+                                                        <div style="display: inline-block;"></div>
+                                                    {% endif %}
+                                                    <a href="{{ path('app_back_newsletter_command_scheduler_details_edit', {'id': command.id}) }}">
+                                                        <i class="uil uil-edit text-info font-size-22"
+                                                           title="{{ "action.edit"|trans }}"></i>
+                                                    </a>
+                                                    <a href="{{ path('app_back_newsletter_command_scheduler_action_remove', {'id': command.id}) }}"
+                                                       data-toggle="confirmation"
+                                                       data-btn-ok-label="{{ "action.delete"|trans }}"
+                                                       data-title="{{ "confirm.delete"|trans }}">
+                                                        <i class="uil uil-trash-alt text-danger font-size-22"
+                                                           title="{{ "action.delete"|trans }}"></i>
+                                                    </a>
+                                                    <a href="{{ path('app_back_newsletter_command_scheduler_action_execute', {'id': command.id}) }}"
+                                                       data-toggle="confirmation"
+                                                       data-btn-ok-label="{{ "action.execute"|trans }}"
+                                                       data-title="{{ "confirm.execute"|trans }}"
+                                                    >
+                                                        <i class=" uil uil-play-circle font-size-22 text-{% if command.executeImmediately == true %}muted{% else %}success{% endif %}"
+                                                           title="{{ "action.execute"|trans }}"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+{{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- Required datatable js -->
+<script src="{{ asset('/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
+
+<!-- Responsive examples -->
+<script src="/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+{# <script src="https://unpkg.com/@popperjs/core@2"></script> #}
+{# <script src="{{ asset('bundles/dukecitycommandscheduler/js/bootstrap-confirmation.js') }}"></script> #}
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>

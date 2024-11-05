@@ -1,0 +1,120 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Datatables'}) }}
+
+    <!-- DataTables -->
+    <link href="/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Responsive datatable examples -->
+    <link href="/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Abonnements', title: 'Abonnements'}) }}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Statistiques</h3>
+                        <p>Effectif total : {{ total }}€</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{ asset('images/maintenance.png') }}" width="400px" height="200px" alt="stats">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+        <div id="div_chart"></div>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'div_chart') }}
+        </script>
+
+    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="div_bar"></div>
+
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                            {{ gc_draw(bar, 'div_bar') }}
+                        </script>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="div_histo"></div>
+
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                            {{ gc_draw(histo, 'div_histo') }}
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+
+{# <!-- Required datatable js --> #}
+{# <script src="/libs/datatables.net/js/jquery.dataTables.min.js"></script> #}
+{# <script src="/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script> #}
+{# <!-- Buttons examples --> #}
+{# <script src="/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script> #}
+{# <script src="/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script> #}
+{# <script src="/libs/jszip/jszip.min.js"></script> #}
+{# <script src="/libs/pdfmake/build/pdfmake.min.js"></script> #}
+{# <script src="/libs/pdfmake/build/vfs_fonts.js"></script> #}
+{# <script src="/libs/datatables.net-buttons/js/buttons.html5.min.js"></script> #}
+{# <script src="/libs/datatables.net-buttons/js/buttons.print.min.js"></script> #}
+{# <script src="/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script> #}
+
+<!-- Responsive examples -->
+<script src="/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/js/pages/datatables.init.js"></script>
+
+<!-- App js -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+{{ include('partials/main.html.twig') }}
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'User List'}) }}
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Avis', title: 'Details de l\'avis'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control rounded bg-light border-0"
+                                                           placeholder="Search...">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <td>{{ avi.id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Type</th>
+                                            <td>{{ avi.type }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td>{{ avi.description }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>AvisSur</th>
+                                            <td>{{ avi.avisSur }}</td>
+                                        </tr>
+                                        </tbody>
+                                        <tr>
+                                            <th>REPONSES:</th>
+                                            <td>
+                                                {% for reponse in reponses %}
+                                                {% if reponse.avisId == avi.id %}
+                                                {#                                        <tr> #}
+                                                {#                                                    <td>{{ reponse.id }}</td> #}
+                                                <ul>
+                                                    <li>{{ reponse.description }}</li>
+                                                </ul>
+                                                {#                                                    <td>{{ reponse.avisId }}</td> #}
+                                            </td>
+                                            {#                                                        <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}">show</a> #}
+                                            {#                                                        <a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">edit</a> #}
+                                            {#                                                        <a href="{{ path('app_reponse_new') }}">Create new</a> #}
+                                            {#                                        </tr> #}
+                                            {% endif %}
+                                            {% endfor %}
+                                            <br>
+                                            <br>
+
+                                    </table>
+                                    {{ include('/reponse/_form.html.twig') }}
+
+                                    {#                                    <a href="{{ path('app_back_avis_app_avis_indexBack') }}">back to list</a> #}
+
+                                    {#                                    <a href="{{ path('app_back_avis_app_avis_editB', {'id': avi.id}) }}">edit</a> #}
+
+                                    {#                                    {{ include('avis/_delete_form.html.twig') }} #}
+
+                                    {#    <a href="{{ path('app_avis_new') }}">Create new</a> #}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+        {{ include('partials/footer.html.twig') }}
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+{{ include('partials/right-sidebar.html.twig') }}
+
+        {{ include('partials/vendor-scripts.html.twig') }}
+
+<!-- App js -->
+<script src="{{ asset('/js/app.js') }}"></script>
+
+</body>
+</html>

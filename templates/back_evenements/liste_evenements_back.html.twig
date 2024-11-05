@@ -1,0 +1,275 @@
+{{ include('partials/main.html.twig') }}
+
+<head>
+
+    {{ include('partials/title-meta.html.twig', {title: 'Liste des Ateliers'}) }}
+
+    <link href="{{ asset('/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css"/>
+
+    {{ include('partials/head-css.html.twig') }}
+
+</head>
+
+{{ include('partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('partials/menu.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                {{ include('partials/page-title.html.twig', {pagetitle: 'Evenements', title: 'Liste des évènements'}) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+
+                                            <a href="{{ path('app_back_evenements_add') }}"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="mdi mdi-plus me-2"></i> Ajouter évènement</a>
+                                            <a href="{{ path('app_back_evenements_stats') }}"
+                                               class="btn btn-primary waves-effect waves-light"><i
+                                                        class="uil-chart-bar me-2"></i> Statistiques</a>
+
+                                            <div class="btn-group">
+                                                <button type="button"
+                                                        class="btn btn-primary dropdown-toggle waves-effect waves-light"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    Trier par: <i class="mdi mdi-chevron-down"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#" value="nom">Nom</a>
+                                                    <a class="dropdown-item" href="#" value="date_debut">Date de
+                                                        début</a>
+                                                    <a class="dropdown-item" href="#" value="nb_participants">Nombre de
+                                                        participants</a>
+                                                </div>
+                                            </div><!-- /btn-group -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-inline float-md-end mb-3">
+                                            <div class="search-box ms-2">
+                                                <div class="position-relative">
+                                                    <input type="text" id="search" name="nom"
+                                                           class="form-control rounded bg-light border-0"
+                                                           placeholder="Rechercher...">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- end row -->
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-centered table-nowrap mb-0">
+                                        <thead>
+                                        <tr>
+
+                                            <th>nom</th>
+                                            <th>Date Debut</th>
+                                            <th>Date fin</th>
+                                            <th>Lieu</th>
+                                            <th>Type</th>
+                                            <th>nb participants</th>
+                                            <th>supprimer</th>
+                                            <th>modifier</th>
+                                            <th>voir rapport</th>
+
+                                        </tr>
+
+                                        </thead>
+
+
+                                        <tbody id="all">
+                                        {% for evenement in evenements %}
+                                            <tr>
+                                                <td>{{ evenement.nom }}</td>
+                                                <td>{{ evenement.dateDebut|format_date }}</td>
+                                                <td>{{ evenement.dateFin|format_date }}</td>
+                                                <td>{{ evenement.lieu }}</td>
+                                                <td>{{ evenement.type }}</td>
+                                                <td>{{ evenement.nbParticipants }}</td>
+
+                                                <td>
+                                                    <a type="button"
+                                                       class="btn btn-danger btn-rounded waves-effect waves-light"
+                                                       href="{{ path ('app_back_evenements_remove',{'id':evenement.id}) }}">supprimer</a>
+
+                                                </td>
+                                                <td>
+                                                    <a type="button"
+                                                       class="px-2 text-primary"
+                                                       href="{{ path ('app_back_evenements_update',{'id':evenement.id}) }}">modifier</a>
+
+
+                                                </td>
+
+
+                                                <td>
+                                                    <a type="button"
+                                                       class="btn btn-info btn-rounded waves-effect waves-light"
+                                                       href="{{ path ('app_back_evenements_voir_rapport',{'id':evenement.id}) }}">Voir</a>
+                                                </td>
+
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tbody id="searchtab">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+
+
+                    <!------------------------------------------- fin partie evenements-------------------------------------------------->
+
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+
+            {{ include('partials/footer.html.twig') }}
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    {{ include('partials/right-sidebar.html.twig') }}
+
+    {{ include('partials/vendor-scripts.html.twig') }}
+
+
+    <!-- App js -->
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+
+    <!-- Script JavaScript pour la recherche -->
+
+
+    <!-- Script JavaScript pour la recherche -->
+    <script>
+        $(document).ready(function () {
+            $("#search").keyup(function (e) {
+                var value = $(this).val();
+                $.ajax({
+                    url: "{{ path('app_back_evenementssearch') }}",
+                    type: 'GET',
+                    data: {
+                        'searchValue': value
+                    },
+                    success: function (retour) {
+                        if (retour) {
+                            $("#searchtab").empty();
+                            $.each(JSON.parse(retour), function (i, obj) {
+                                console.log(obj);
+                                $("#all").hide();
+                                $("#searchtab").append('<tr>' +
+                                    '<td>' + obj.nom + '</td>' +
+                                    '<td>' + moment(obj.dateDebut).format('MMM DD, YYYY') + '</td>' +
+                                    '<td>' + moment(obj.dateFin).format('MMM DD, YYYY') + '</td>' +
+                                    '<td>' + obj.lieu + '</td>' +
+                                    '<td>' + obj.type + '</td>' +
+                                    '<td>' + obj.nbParticipants + '</td>' +
+                                    '<td><a href="/back/evenements/supprimer/' + obj.id + '" class="btn btn-danger btn-rounded waves-effect waves-light">supprimer</a>' +
+
+
+                                    '<td><a href="/back/evenements/update/' + obj.id + '" class="px-2 text-primary"><i class="uil uil-pen font-size-18">modifer</i></a>' +
+
+                                    '<td><a href="/back/evenements/voir_rapport/' + obj.id + '" class="px-2 text-primary"><i class="btn btn-info btn-rounded waves-effect waves-light">voir rapport</i></a>' +
+
+                                    '</tr>');
+
+
+                            });
+                        } else {
+                            $("#all").show();
+                            $("#searchtab").empty();
+                            $("#searchtab").fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+
+
+    {# ################################tri######################################################## #}
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-menu a').click(function () {
+                console.log($(this).attr('value'));
+                // Récupérer la valeur sélectionnée du bouton radio
+                var triPar = $(this).attr('value');
+                console.log(triPar);
+                // Envoyer la valeur sélectionnée au serveur pour effectuer le tri
+                $.ajax({
+                    url: "{{ path('app_back_evenementstri') }}",
+                    type: 'GET',
+                    data: {
+                        'triPar': triPar
+                    },
+                    success: function (retour) {
+                        // Mettre à jour le tableau (ou la table HTML) avec les résultats triés
+                        if (retour) {
+
+                            // Vider le contenu du tableau avant d'ajouter les nouvelles lignes
+                            $("#searchtab").empty();
+                            $.each(JSON.parse(retour), function (i, obj) {
+                                    console.log(obj);
+                                    $("#all").hide();
+                                    $("#searchtab").append('<tr>' + '<td>' + obj.nom + '</td>' +
+                                        '<td>' + moment(obj.dateDebut).format('MMM DD, YYYY') + '</td>' +
+                                        '<td>' + moment(obj.dateFin).format('MMM DD, YYYY') + '</td>' +
+                                        '<td>' + obj.lieu + '</td>' +
+                                        '<td>' + obj.type + '</td>' +
+                                        '<td>' + obj.nbParticipants + '</td>' +
+                                        '<td><a href="/back/evenements/supprimer/' + obj.id + '" class="btn btn-danger btn-rounded waves-effect waves-light">supprimer</a>' +
+
+
+                                        '<td><a href="/back/evenements/update/' + obj.id + '" class="px-2 text-primary"><i class="uil uil-pen font-size-18">modifer</i></a>' +
+
+                                        '<td><a href="/back/evenements/voir_rapport/' + obj.id + '" class="px-2 text-primary"><i class="btn btn-info btn-rounded waves-effect waves-light">voir rapport</i></a>' +
+
+                                        '</tr>');
+                                }
+                            );
+
+                        } else {
+                            // Afficher un message si aucun résultat n'est retourné
+                            $("#all").show();
+                            $("#searchtab").empty();
+                            $("#searchtab").fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+
+    </body>
+    </html>
